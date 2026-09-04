@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Bruno Hoffmann — UI/UX &amp; Product Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: #06121c; }
+    body { font-family: 'Archivo', sans-serif; color: #eef4f8; }
+    a { color: #a8dcf0; text-decoration: none; }
+    a:hover { color: #ffffff; }
+    ::selection { background: #a8dcf0; color: #06121c; }
+    @keyframes bh-bounce { 0%, 100% { transform: translateY(0); opacity: 0.9; } 50% { transform: translateY(10px); opacity: 0.4; } }
+    @keyframes bh-fadeup { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+    /* Responsividade mobile (media queries não podem ser inline) */
+    @media (max-width: 768px) {
+      #bh-nav { display: none !important; }
+      #bh-header { padding: 10px 18px !important; }
+      #sobre-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
+      #sobre-foto { max-width: 240px; margin: 0 auto; width: 100%; justify-self: center; }
+      #bh-foto { width: 100% !important; max-width: 280px !important; height: auto !important; aspect-ratio: auto !important; object-fit: contain !important; margin: 0 auto !important; justify-self: center !important; }
+      #projetos-grid { grid-template-columns: 1fr !important; }
+      section { padding: 48px 22px !important; min-height: 0 !important; }
+      section[data-screen-label="Hero"] { padding: 110px 22px 64px !important; }
+      #bmw-modal-backdrop, #gotnest-modal-backdrop, #mestry-modal-backdrop { padding: 0 !important; }
+      #bmw-modal-panel, #gotnest-modal-panel, #mestry-modal-panel { max-width: 100% !important; height: 100% !important; max-height: 100% !important; border-radius: 0 !important; border: none !important; }
+    }
+    @media (min-width: 769px) and (max-width: 1080px) {
+      #projetos-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+  </style>
+</helmet>
+
+<!-- ═══ VÍDEO DE FUNDO (scrub no scroll) ═══ -->
+<div style="position: fixed; inset: 0; z-index: 0; overflow: hidden;">
+  <video ref="{{ videoRef }}" src="assets/neve-caindo.mp4" muted="{{ true }}" playsInline="{{ true }}" preload="auto" style="width: 100%; height: 100%; object-fit: cover;"></video>
+  <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(4,14,23,0.62) 0%, rgba(4,14,23,0.38) 45%, rgba(4,14,23,0.72) 100%); opacity: {{ overlayOpacity }};"></div>
+</div>
+
+<!-- barra de progresso do vídeo -->
+<div style="position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 20; background: rgba(168,220,240,0.12);">
+  <div ref="{{ barRef }}" style="height: 100%; width: 0%; background: #a8dcf0;"></div>
+</div>
+
+<!-- topo fixo -->
+<div style="position: fixed; top: 14px; left: 0; right: 0; z-index: 10; display: flex; justify-content: center; padding: 0 24px;">
+  <header id="bh-header" style="width: 100%; max-width: 1100px; display: flex; justify-content: space-between; align-items: center; padding: 14px 28px; box-sizing: border-box; border-radius: 100px; background: {{ headerBg }}; border: 1px solid {{ headerBorder }}; backdrop-filter: blur(12px); transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease; box-shadow: {{ headerShadow }};">
+    <div style="font-weight: 800; letter-spacing: 0.06em; font-size: 15px;">BRUNO HOFFMANN<span style="color: #a8dcf0;">.</span></div>
+    <div style="display: flex; align-items: center; gap: 26px;">
+      <nav id="bh-nav" style="display: flex; gap: 26px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.08em;">
+        <a href="#sobre">{{ t.nav.sobre }}</a>
+        <a href="#skills">{{ t.nav.skills }}</a>
+        <a href="#projetos">{{ t.nav.projetos }}</a>
+        <a href="#contato">{{ t.nav.contato }}</a>
+      </nav>
+      <div style="position: relative;">
+        <button onClick="{{ toggleLang }}" style="display: flex; align-items: center; gap: 8px; background: rgba(168,220,240,0.12); border: 1px solid rgba(168,220,240,0.35); border-radius: 100px; padding: 7px 14px; cursor: pointer; color: #eef4f8; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.06em;" style-hover="background: rgba(168,220,240,0.22); border: 1px solid rgba(168,220,240,0.6);">
+          <span style="font-size: 15px; line-height: 1;">{{ langFlag }}</span>
+          <span>{{ langLabel }}</span>
+          <span style="font-size: 9px; opacity: 0.7;">▼</span>
+        </button>
+        <sc-if value="{{ langOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position: absolute; top: calc(100% + 8px); right: 0; background: rgba(6,18,28,0.92); backdrop-filter: blur(14px); border: 1px solid rgba(168,220,240,0.3); border-radius: 16px; overflow: hidden; min-width: 170px; box-shadow: 0 12px 32px rgba(0,10,20,0.5);">
+            <button onClick="{{ setPt }}" style="display: flex; align-items: center; gap: 10px; width: 100%; padding: 11px 16px; background: transparent; border: none; cursor: pointer; color: #eef4f8; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.06em; text-align: left;" style-hover="background: rgba(168,220,240,0.14);"><span style="font-size: 15px;">🇧🇷</span> Português</button>
+            <button onClick="{{ setEn }}" style="display: flex; align-items: center; gap: 10px; width: 100%; padding: 11px 16px; background: transparent; border: none; cursor: pointer; color: #eef4f8; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.06em; text-align: left;" style-hover="background: rgba(168,220,240,0.14);"><span style="font-size: 15px;">🇺🇸</span> English</button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </header>
+</div>
+
+<main style="position: relative;">
+
+  <!-- ═══ HERO ═══ -->
+  <section data-screen-label="Hero" style="position: relative; display: flex; flex-direction: column; justify-content: center; padding: 170px 40px 70px; box-sizing: border-box;">
+    <div style="max-width: 1100px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 26px; animation: bh-fadeup 0.9s ease both;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.22em; color: #a8dcf0;">DESIGNER ENGINEER · UI/UX · PRODUCT DESIGNER</div>
+      <h1 style="margin: 0; font-size: clamp(56px, 9vw, 128px); line-height: 0.96; font-weight: 900; letter-spacing: -0.02em; font-stretch: 105%;">{{ t.hero.titleLine1 }}<br>{{ t.hero.titleLine2 }}</h1>
+      <p style="margin: 0; max-width: 560px; font-size: 19px; line-height: 1.6; color: rgba(238,244,248,0.85); font-weight: 400;">{{ t.hero.subtitle }}</p>
+    </div>
+
+  </section>
+
+  <!-- ═══ SOBRE ═══ -->
+  <section id="sobre" data-screen-label="Sobre" style="display: flex; align-items: center; padding: 70px 40px; box-sizing: border-box;">
+    <div id="sobre-grid" style="max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 340px 1fr; gap: 64px; align-items: center;">
+      <div id="sobre-foto" style="position: relative;">
+        
+        <div style="position: absolute; bottom: -14px; left: -14px; background: #a8dcf0; color: #06121c; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; padding: 8px 14px; border-radius: 6px; font-weight: 500;">{{ t.sobre.badge }}</div>
+      <img id="bh-foto" src="assets/foto-neve.png" alt="{{ t.sobre.photoAlt }}" style="width: 370px; aspect-ratio: 1; object-fit: cover; border-radius: 18px; display: block; border: 1px solid rgba(168,220,240,0.3); height: 491px"></div>
+      <div style="display: flex; flex-direction: column; gap: 22px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.22em; color: #a8dcf0;">{{ t.sobre.eyebrow }}</div>
+        <h2 style="margin: 0; font-size: clamp(34px, 4.4vw, 56px); font-weight: 800; line-height: 1.05; letter-spacing: -0.015em;">{{ t.sobre.title }}</h2>
+        <p style="margin: 0; font-size: 17px; line-height: 1.7; color: rgba(238,244,248,0.85);"><strong style="color: #ffffff;">{{ t.sobre.p1Strong }}</strong>{{ t.sobre.p1Rest }}</p>
+        <p style="margin: 0; font-size: 17px; line-height: 1.7; color: rgba(238,244,248,0.85);">{{ t.sobre.p2Pre }}<strong style="color: #ffffff;">{{ t.sobre.p2Strong1 }}</strong>{{ t.sobre.p2Mid }}<strong style="color: #ffffff;">{{ t.sobre.p2Strong2 }}</strong>{{ t.sobre.p2Post }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SKILLS ═══ -->
+  <section id="skills" data-screen-label="Skills" style="display: flex; align-items: center; padding: 70px 40px; box-sizing: border-box;">
+    <div style="max-width: 1100px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 40px;">
+      <div style="display: flex; flex-direction: column; gap: 18px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.22em; color: #a8dcf0;">{{ t.skills.eyebrow }}</div>
+        <h2 style="margin: 0; font-size: clamp(34px, 4.4vw, 56px); font-weight: 800; line-height: 1.05; letter-spacing: -0.015em;">{{ t.skills.title }}</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px;">
+        <sc-for list="{{ skills }}" as="skill" hint-placeholder-count="8">
+          <div style="position: relative; overflow: hidden; background: rgba(255,255,255,0.04); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 26px; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 4px 24px rgba(0,10,20,0.25); transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;" style-hover="background: rgba(255,255,255,0.07); border: 1px solid rgba(168,220,240,0.3); transform: translateY(-2px);">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a8dcf0; letter-spacing: 0.14em; margin-bottom: 4px;">{{ skill.num }}</div>
+
+            <div style="font-weight: 800; font-size: 18px; color: #ffffff;">{{ skill.title }}</div><div style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #a8dcf0; line-height: 1.4;">{{ skill.sub }}</div>
+            <div style="font-size: 13.5px; line-height: 1.5; color: rgba(238,244,248,0.7);">{{ skill.desc }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROJETOS ═══ -->
+  <section id="projetos" data-screen-label="Projetos" style="display: flex; align-items: center; padding: 70px 40px; box-sizing: border-box;">
+    <div style="max-width: 1100px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 40px;">
+      <div style="display: flex; flex-direction: column; gap: 18px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.22em; color: #a8dcf0;">{{ t.projetos.eyebrow }}</div>
+        <h2 style="margin: 0; font-size: clamp(34px, 4.4vw, 56px); font-weight: 800; line-height: 1.05; letter-spacing: -0.015em;">{{ t.projetos.title }}</h2>
+        <p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: rgba(238,244,248,0.6); letter-spacing: 0.06em;">{{ t.projetos.hint }}</p>
+      </div>
+      <div id="projetos-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+        <div onClick="{{ openMestry }}" style="display: flex; flex-direction: column; gap: 14px; cursor: pointer;" style-hover="transform: translateY(-4px);">
+          <div style="width: 100%; aspect-ratio: 4/3; border-radius: 14px; overflow: hidden; border: 1px solid rgba(168,220,240,0.2);">
+            <img src="assets/case-mestry-cover.png" alt="{{ t.projetos.items.mestry.alt }}" style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;">
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <div style="font-weight: 700; font-size: 17px;">Mestry</div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: rgba(238,244,248,0.6);">{{ t.projetos.items.mestry.category }}</div>
+          </div>
+        </div>
+        <div onClick="{{ openBmw }}" style="display: flex; flex-direction: column; gap: 14px; cursor: pointer;" style-hover="transform: translateY(-4px);">
+          <div style="width: 100%; aspect-ratio: 4/3; border-radius: 14px; overflow: hidden; border: 1px solid rgba(168,220,240,0.2);">
+            <x-import component-from-global-scope="image-slot" from="./assets/image-slot.js" id="case-03" shape="rect" src="assets/case-bmw.png" placeholder="Capa do case 03" hint-size="100%,100%"></x-import>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <div style="font-weight: 700; font-size: 17px; color: #eef4f8;">{{ t.projetos.items.bmw.title }}</div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: rgba(238,244,248,0.6);">{{ t.projetos.items.bmw.category }}</div>
+          </div>
+        </div>
+        <div onClick="{{ openGotnest }}" style="display: flex; flex-direction: column; gap: 14px; cursor: pointer;" style-hover="transform: translateY(-4px);">
+          <div style="width: 100%; aspect-ratio: 4/3; border-radius: 14px; overflow: hidden; border: 1px solid rgba(168,220,240,0.2);">
+            <x-import component-from-global-scope="image-slot" from="./assets/image-slot.js" id="case-02" shape="rect" src="assets/case-gotnest.png" placeholder="Capa do case 02" hint-size="100%,100%"></x-import>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <div style="font-weight: 700; font-size: 17px;">Got Nest?</div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: rgba(238,244,248,0.6);">{{ t.projetos.items.gotnest.category }}</div>
+          </div>
+        </div>
+        <a href="https://www.behance.net/gallery/166181039/Projeto-Pay-Flow" target="_blank" style="display: flex; flex-direction: column; gap: 14px; cursor: pointer; text-decoration: none; color: inherit;" style-hover="transform: translateY(-4px);">
+          <div style="width: 100%; aspect-ratio: 4/3; border-radius: 14px; overflow: hidden; border: 1px solid rgba(168,220,240,0.2);">
+            <x-import component-from-global-scope="image-slot" from="./assets/image-slot.js" id="case-04" shape="rect" src="assets/case-payflow.png" placeholder="Capa do case 04" hint-size="100%,100%"></x-import>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <div style="font-weight: 700; font-size: 17px; color: #eef4f8;">{{ t.projetos.items.payflow.title }}</div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: rgba(238,244,248,0.6);">{{ t.projetos.items.payflow.category }}</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTATO ═══ -->
+  <section id="contato" data-screen-label="Contato" style="display: flex; align-items: center; padding: 70px 40px; box-sizing: border-box;">
+    <div style="max-width: 1100px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 34px; align-items: flex-start;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.22em; color: #a8dcf0;">{{ t.contato.eyebrow }}</div>
+      <h2 style="margin: 0; font-size: clamp(48px, 7.5vw, 104px); font-weight: 900; line-height: 0.98; letter-spacing: -0.02em;">{{ t.contato.titleLine1 }}<br>{{ t.contato.titleLine2 }}</h2>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+        <a href="https://www.linkedin.com/in/brunohoffmaann/" target="_blank" style="display: inline-flex; align-items: center; gap: 10px; background: #a8dcf0; color: #06121c; font-weight: 700; font-size: 15px; padding: 16px 28px; border-radius: 999px;" style-hover="background: #ffffff; color: #06121c;">LinkedIn ↗</a>
+        <a href="https://www.instagram.com/brunohoffmaannn/" target="_blank" style="display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(168,220,240,0.5); color: #eef4f8; font-weight: 700; font-size: 15px; padding: 16px 28px; border-radius: 999px;" style-hover="border: 1px solid #ffffff; color: #ffffff;">Instagram ↗</a>
+      </div>
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: rgba(238,244,248,0.5); letter-spacing: 0.08em; margin-top: 40px;">{{ t.contato.footer }}</div>
+    </div>
+  </section>
+
+
+
+  <!-- ═══ MODAL: CASE BMW ═══ -->
+  <sc-if value="{{ bmwOpen }}" hint-placeholder-val="{{ false }}">
+    <div id="bmw-modal-backdrop" onClick="{{ closeBmw }}" style="position: fixed; inset: 0; z-index: 100; background: rgba(4,10,16,0.86); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 28px; animation: bh-fadeup 0.25s ease both;">
+      <div id="bmw-modal-panel" onClick="{{ stopBmw }}" style="position: relative; width: 100%; max-width: 1240px; height: 100%; max-height: 92vh; background: #08090c; border: 1px solid rgba(168,220,240,0.25); border-radius: 24px; box-shadow: 0 24px 60px rgba(0,0,0,0.5); overflow: hidden;">
+        <button onClick="{{ closeBmw }}" aria-label="Close" style="position: absolute; top: 18px; right: 18px; z-index: 2; width: 38px; height: 38px; border-radius: 100px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); color: #eef4f8; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px);" style-hover="background: rgba(255,255,255,0.2);">✕</button>
+        <iframe src="case-bmw/Case BMW Financiamento.dc.html" title="Case BMW Financiamento" style="width: 100%; height: 100%; border: 0; display: block; background: #08090c;"></iframe>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ═══ MODAL: CASE GOT NEST ═══ -->
+  <sc-if value="{{ gotnestOpen }}" hint-placeholder-val="{{ false }}">
+    <div id="gotnest-modal-backdrop" onClick="{{ closeGotnest }}" style="position: fixed; inset: 0; z-index: 100; background: rgba(4,10,16,0.86); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 28px; animation: bh-fadeup 0.25s ease both;">
+      <div id="gotnest-modal-panel" onClick="{{ stopGotnest }}" style="position: relative; width: 100%; max-width: 1240px; height: 100%; max-height: 92vh; background: #ffffff; border: 1px solid rgba(168,220,240,0.25); border-radius: 24px; box-shadow: 0 24px 60px rgba(0,0,0,0.5); overflow: hidden;">
+        <button onClick="{{ closeGotnest }}" aria-label="Close" style="position: absolute; top: 18px; right: 18px; z-index: 2; width: 38px; height: 38px; border-radius: 100px; background: rgba(20,23,26,0.55); border: 1px solid rgba(255,255,255,0.3); color: #ffffff; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px);" style-hover="background: rgba(20,23,26,0.8);">✕</button>
+        <iframe src="case-gotnest/Got Nest Case Study.dc.html" title="Case Got Nest" style="width: 100%; height: 100%; border: 0; display: block; background: #ffffff;"></iframe>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ═══ MODAL: CASE MESTRY ═══ -->
+  <sc-if value="{{ mestryOpen }}" hint-placeholder-val="{{ false }}">
+    <div id="mestry-modal-backdrop" onClick="{{ closeMestry }}" style="position: fixed; inset: 0; z-index: 100; background: rgba(4,10,16,0.86); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 28px; animation: bh-fadeup 0.25s ease both;">
+      <div id="mestry-modal-panel" onClick="{{ stopMestry }}" style="position: relative; width: 100%; max-width: 1240px; height: 100%; max-height: 92vh; background: #0A0D20; border: 1px solid rgba(168,220,240,0.25); border-radius: 24px; box-shadow: 0 24px 60px rgba(0,0,0,0.5); overflow: hidden;">
+        <button onClick="{{ closeMestry }}" aria-label="Close" style="position: absolute; top: 18px; right: 18px; z-index: 2; width: 38px; height: 38px; border-radius: 100px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); color: #eef4f8; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px);" style-hover="background: rgba(255,255,255,0.2);">✕</button>
+        <iframe src="case-mestry/Mestry Projeto.dc.html" title="Case Mestry" style="width: 100%; height: 100%; border: 0; display: block; background: #0A0D20;"></iframe>
+      </div>
+    </div>
+  </sc-if>
+
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;videoMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;scrub&quot;,&quot;autoplay&quot;],&quot;default&quot;:&quot;autoplay&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Vídeo de fundo&quot;},&quot;suavidade&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0.02,&quot;max&quot;:0.3,&quot;step&quot;:0.01,&quot;default&quot;:0.06,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Vídeo de fundo&quot;},&quot;overlayOpacity&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0.3,&quot;max&quot;:1,&quot;step&quot;:0.05,&quot;default&quot;:1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Vídeo de fundo&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { scrolled: false, lang: 'pt', langOpen: false, bmwOpen: false, gotnestOpen: false, mestryOpen: false };
+    this.videoRef = React.createRef();
+    this.barRef = React.createRef();
+    this.target = 0;
+    this.current = 0;
+    this.raf = null;
+    this.onScroll = this.onScroll.bind(this);
+    this.tick = this.tick.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
+  }
+
+  onKeyDown(e) {
+    if (e.key !== 'Escape') return;
+    if (this.state.bmwOpen) this.setState({ bmwOpen: false });
+    if (this.state.gotnestOpen) this.setState({ gotnestOpen: false });
+    if (this.state.mestryOpen) this.setState({ mestryOpen: false });
+  }
+
+  componentDidUpdate() {
+    document.body.style.overflow = (this.state.bmwOpen || this.state.gotnestOpen || this.state.mestryOpen) ? 'hidden' : '';
+  }
+
+  onScroll() {
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - window.innerHeight;
+    this.target = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    const scrolled = window.scrollY > 60;
+    if (scrolled !== this.state.scrolled) this.setState({ scrolled });
+  }
+
+  tick() {
+    this._lastTick = performance.now();
+    this.onScroll();
+    const video = this.videoRef.current;
+    const mode = this.props.videoMode ?? 'scrub';
+    if (video) {
+      if (mode === 'autoplay') {
+        if (video.paused) video.play().catch(() => {});
+      } else {
+        if (!video.paused) video.pause();
+        const smooth = this.props.suavidade ?? 0.08;
+        this.current += (this.target - this.current) * smooth;
+        if (video.duration && isFinite(video.duration)) {
+          const t = this.current * video.duration;
+          if (Math.abs(video.currentTime - t) > 0.01) video.currentTime = t;
+        }
+      }
+    }
+    if (this.barRef.current) {
+      const p = mode === 'autoplay' && video && video.duration
+        ? video.currentTime / video.duration
+        : this.current;
+      this.barRef.current.style.width = (p * 100) + '%';
+    }
+    this.raf = requestAnimationFrame(this.tick);
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('keydown', this.onKeyDown);
+    const video = this.videoRef.current;
+    if (video) video.load();
+    this.onScroll();
+    this.raf = requestAnimationFrame(this.tick);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('keydown', this.onKeyDown);
+    document.body.style.overflow = '';
+    if (this.raf) cancelAnimationFrame(this.raf);
+  }
+
+  ensureLoop() {
+    // reinicia o loop se ele morreu (ex.: após hot reload)
+    const now = performance.now();
+    if (!this._lastTick || now - this._lastTick > 500) {
+      if (this.raf) cancelAnimationFrame(this.raf);
+      this.raf = requestAnimationFrame(this.tick);
+    }
+  }
+
+  renderVals() {
+    this.ensureLoop();
+    const s = this.state;
+    const dict = {
+      pt: {
+        nav: { sobre: 'SOBRE', skills: 'SKILLS', projetos: 'PROJETOS', contato: 'CONTATO' },
+        hero: {
+          titleLine1: 'Design frio.',
+          titleLine2: 'Decisões precisas.',
+          subtitle: 'Há mais de 6 anos criando interfaces responsivas e disruptivas, da pesquisa com usuários ao handoff para desenvolvimento.'
+        },
+        sobre: {
+          eyebrow: '01 — SOBRE',
+          badge: '−12°C · EM CAMPO',
+          photoAlt: 'Bruno Hoffmann na neve',
+          title: 'Do dado bruto à interface pronta para escalar.',
+          p1Strong: 'Product Designer com mais de 6 anos de experiência',
+          p1Rest: ', atuando end-to-end no desenvolvimento de produtos digitais para web e mobile. Conduzo UX Strategy, Discovery e arquitetura de User Flows, crio e evolvo Design Systems, e domino o Figma em nível avançado (componentes, variáveis e Auto Layout). Faço o handoff para desenvolvimento acompanhando de perto, com revisão de Pull Requests e QA visual junto ao time de engenharia.',
+          p2Pre: 'Utilizo ',
+          p2Strong1: 'Inteligência Artificial',
+          p2Mid: ' no processo de design com ferramentas como ',
+          p2Strong2: 'Claude Design, Claude Code e Figma Make',
+          p2Post: ', estruturando AI Workflows que aceleram discovery, prototipação, documentação e validação de hipóteses. Minhas decisões são orientadas por pesquisa e métricas (UX Research + Data Driven), com foco em produto e crescimento (priorização, onboarding, conversão, retenção e experimentação via A/B Tests), sempre colaborando com Product Owners, CEOs e equipes multidisciplinares em metodologias ágeis como Scrum e Kanban.'
+        },
+        skills: {
+          eyebrow: '02 — SKILLS',
+          title: 'O que eu levo para o time.',
+          list: [
+            { num: '01', title: 'IA aplicada ao Design', sub: 'Claude Design, Claude Code e Figma Make', desc: 'Uso de IA para acelerar discovery, wireframes, protótipos e documentação.' },
+            { num: '02', title: 'Design Systems', sub: 'Escalabilidade para Design e Código', desc: 'Criação, evolução e governança de Design Systems integrados ao desenvolvimento.' },
+            { num: '03', title: 'UX Strategy & User Flows', sub: 'Mapeamento completo da experiência', desc: 'Construção de jornadas, fluxos e arquitetura antes da interface.' },
+            { num: '04', title: 'Figma Avançado', sub: 'Componentes, Variáveis e Auto Layout', desc: 'Domínio avançado do ecossistema Figma para produtos escaláveis.' },
+            { num: '05', title: 'Handoff & PRs para Devs', sub: 'Validação e acompanhamento da implementação', desc: 'Especificações claras, revisão de Pull Requests, QA visual e alinhamento contínuo com engenharia.' },
+            { num: '06', title: 'Pesquisa & Métricas', sub: 'UX Research + Data Driven', desc: 'Entrevistas, testes de usabilidade, análise de métricas e decisões baseadas em dados.' },
+            { num: '07', title: 'AI Workflow & Automações', sub: 'Fluxos inteligentes de produto', desc: 'Criação de pipelines utilizando IA para discovery, documentação, validação e entrega.' },
+            { num: '08', title: 'Produto & Crescimento', sub: 'UX orientado ao negócio', desc: 'Discovery, priorização, onboarding, conversão, retenção, experimentação (A/B Tests) e otimização contínua.' }
+          ]
+        },
+        projetos: {
+          eyebrow: '03 — PROJETOS',
+          title: 'Projetos selecionados.',
+          hint: '// arraste as imagens dos seus cases para os espaços abaixo',
+          items: {
+            mestry: { alt: 'Mestry, Marketing Analytics', category: 'Marketing Analytics · SaaS' },
+            gotnest: { category: 'App Mobile · SaaS B2B' },
+            bmw: { title: 'BMW Minha Conta', category: 'Plataforma Web · Automotivo' },
+            payflow: { title: 'Projeto PayFlow', category: 'App Mobile · Fintech' }
+          }
+        },
+        contato: {
+          eyebrow: '04 — CONTATO',
+          titleLine1: 'Vamos quebrar',
+          titleLine2: 'o gelo?',
+          footer: '© 2026 BRUNO HOFFMANN · FEITO A −12°C'
+        }
+      },
+      en: {
+        nav: { sobre: 'ABOUT', skills: 'SKILLS', projetos: 'PROJECTS', contato: 'CONTACT' },
+        hero: {
+          titleLine1: 'Cold design.',
+          titleLine2: 'Precise decisions.',
+          subtitle: 'For over 6 years creating responsive, disruptive interfaces, from user research to development handoff.'
+        },
+        sobre: {
+          eyebrow: '01 — ABOUT',
+          badge: '−12°C · IN THE FIELD',
+          photoAlt: 'Bruno Hoffmann in the snow',
+          title: 'From raw data to interfaces ready to scale.',
+          p1Strong: 'Product Designer with over 6 years of experience',
+          p1Rest: ', working end-to-end on digital products for web and mobile. I lead UX Strategy, Discovery, and User Flow architecture, build and evolve Design Systems, and have advanced command of Figma (components, variables, and Auto Layout). I stay close to development handoff, reviewing Pull Requests and doing visual QA with the engineering team.',
+          p2Pre: 'I use ',
+          p2Strong1: 'Artificial Intelligence',
+          p2Mid: ' throughout the design process with tools like ',
+          p2Strong2: 'Claude Design, Claude Code, and Figma Make',
+          p2Post: ', building AI Workflows that speed up discovery, prototyping, documentation, and hypothesis validation. My decisions are driven by research and metrics (UX Research + Data Driven), with a focus on product and growth (prioritization, onboarding, conversion, retention, and A/B testing), always collaborating with Product Owners, CEOs, and cross-functional teams using agile methodologies like Scrum and Kanban.'
+        },
+        skills: {
+          eyebrow: '02 — SKILLS',
+          title: 'What I bring to the team.',
+          list: [
+            { num: '01', title: 'AI Applied to Design', sub: 'Claude Design, Claude Code, and Figma Make', desc: 'Using AI to speed up discovery, wireframes, prototypes, and documentation.' },
+            { num: '02', title: 'Design Systems', sub: 'Scalability for Design and Code', desc: 'Creation, evolution, and governance of Design Systems integrated with development.' },
+            { num: '03', title: 'UX Strategy & User Flows', sub: 'Complete experience mapping', desc: 'Building journeys, flows, and architecture before the interface.' },
+            { num: '04', title: 'Advanced Figma', sub: 'Components, Variables, and Auto Layout', desc: 'Advanced command of the Figma ecosystem for scalable products.' },
+            { num: '05', title: 'Handoff & PRs for Devs', sub: 'Validation and implementation follow-through', desc: 'Clear specs, Pull Request review, visual QA, and continuous alignment with engineering.' },
+            { num: '06', title: 'Research & Metrics', sub: 'UX Research + Data Driven', desc: 'Interviews, usability testing, metrics analysis, and data-driven decisions.' },
+            { num: '07', title: 'AI Workflow & Automation', sub: 'Smart product pipelines', desc: 'Building AI-powered pipelines for discovery, documentation, validation, and delivery.' },
+            { num: '08', title: 'Product & Growth', sub: 'Business-driven UX', desc: 'Discovery, prioritization, onboarding, conversion, retention, experimentation (A/B Tests), and continuous optimization.' }
+          ]
+        },
+        projetos: {
+          eyebrow: '03 — PROJECTS',
+          title: 'Selected cases.',
+          hint: '// drag your case images into the slots below',
+          items: {
+            mestry: { alt: 'Mestry, Marketing Analytics', category: 'Marketing Analytics · SaaS' },
+            gotnest: { category: 'Mobile App · B2B SaaS' },
+            bmw: { title: 'BMW My Account', category: 'Web Platform · Automotive' },
+            payflow: { title: 'PayFlow Project', category: 'Mobile App · Fintech' }
+          }
+        },
+        contato: {
+          eyebrow: '04 — CONTACT',
+          titleLine1: "Let's break",
+          titleLine2: 'the ice?',
+          footer: '© 2026 BRUNO HOFFMANN · MADE AT −12°C'
+        }
+      }
+    };
+    const t = dict[s.lang] ?? dict.pt;
+    return {
+      videoRef: this.videoRef,
+      barRef: this.barRef,
+      headerBg: s.scrolled ? 'rgba(6,18,28,0)' : 'rgba(6,18,28,0.55)',
+      headerBorder: s.scrolled ? 'rgba(168,220,240,0)' : 'rgba(168,220,240,0.25)',
+      headerShadow: s.scrolled ? 'none' : '0 8px 28px rgba(0,10,20,0.35)',
+      langOpen: s.langOpen,
+      langFlag: s.lang === 'pt' ? '🇧🇷' : '🇺🇸',
+      langLabel: s.lang === 'pt' ? 'PT' : 'EN',
+      toggleLang: () => this.setState(p => ({ langOpen: !p.langOpen })),
+      setPt: () => this.setState({ lang: 'pt', langOpen: false }),
+      setEn: () => this.setState({ lang: 'en', langOpen: false }),
+      bmwOpen: s.bmwOpen,
+      openBmw: () => this.setState({ bmwOpen: true }),
+      closeBmw: () => this.setState({ bmwOpen: false }),
+      stopBmw: (e) => e.stopPropagation(),
+      gotnestOpen: s.gotnestOpen,
+      openGotnest: () => this.setState({ gotnestOpen: true }),
+      closeGotnest: () => this.setState({ gotnestOpen: false }),
+      stopGotnest: (e) => e.stopPropagation(),
+      mestryOpen: s.mestryOpen,
+      openMestry: () => this.setState({ mestryOpen: true }),
+      closeMestry: () => this.setState({ mestryOpen: false }),
+      stopMestry: (e) => e.stopPropagation(),
+      overlayOpacity: this.props.overlayOpacity ?? 1,
+      t,
+      skills: t.skills.list
+    };
+  }
+}
+</script>
+</body>
+</html>
