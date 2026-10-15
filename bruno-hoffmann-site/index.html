@@ -1,0 +1,1143 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bruno Hoffmann · Product Designer &amp; Design Engineer</title>
+<meta name="description" content="Bruno Hoffmann, Product Designer e Design Engineer. Do dado bruto à interface pronta para escalar.">
+<meta name="theme-color" content="#05060a">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bruno Hoffmann · Product Designer &amp; Design Engineer">
+<meta property="og:description" content="Bruno Hoffmann, Product Designer e Design Engineer. Do dado bruto à interface pronta para escalar.">
+<meta property="og:locale" content="pt_BR">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="assets/img/favicon-48.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,75..125,300..900;1,75..125,300..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<script>document.body.classList.add('is-loading');</script>
+
+<canvas id="texture" aria-hidden="true"></canvas>
+
+<!-- ============================ OPENING ============================ -->
+<div id="intro" aria-label="Abertura do site">
+  <canvas id="stage" aria-hidden="true"></canvas>
+  <canvas id="trace" aria-hidden="true"></canvas>
+  <p class="intro-caption" id="intro-caption" aria-hidden="true">Product Designer · Design Engineer · IA</p>
+  <button class="enter" id="enter" type="button">
+    <span class="enter-plate" aria-hidden="true"></span>
+    <span class="enter-glow" aria-hidden="true"></span>
+    <span class="enter-text">Quem é Bruno Hoffmann?</span>
+  </button>
+  <div class="intro-controls">
+    <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="true">
+      <span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="sound-label">Som ligado</span>
+    </button>
+    <button class="skip" id="skip" type="button">Pular abertura</button>
+  </div>
+  <div class="wash" aria-hidden="true"></div>
+</div>
+
+<!-- ============================ REEL (entre a abertura e o site) ============================ -->
+<div id="reel" hidden>
+  <div class="reel-glow" aria-hidden="true"></div>
+  <figure class="reel-frame">
+    <video id="reel-video"
+           src="assets/video/apresentacao.mp4"
+           poster="assets/video/apresentacao-poster.webp"
+           preload="auto" playsinline webkit-playsinline
+           aria-label="Vídeo de apresentação de Bruno Hoffmann"></video>
+  </figure>
+  <div class="reel-bar" aria-hidden="true"><span class="reel-bar-fill"></span></div>
+  <div class="reel-controls">
+    <button class="reel-mute" id="reel-mute" type="button" aria-pressed="false">
+      <span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="reel-mute-label">Som ligado</span>
+    </button>
+    <button class="reel-skip" id="reel-skip" type="button">
+      <span>Pular vídeo</span>
+      <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ============================ HEADER ============================ -->
+<header class="header" id="header">
+  <a class="brand" href="#inicio" aria-label="Bruno Hoffmann, voltar ao topo">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-name">Bruno<span>Hoffmann</span></span>
+  </a>
+  <nav class="nav" aria-label="Seções">
+    <a href="#sobre"><span class="nav-n">01</span> Sobre</a>
+    <a href="#projetos"><span class="nav-n">02</span> Projetos</a>
+    <a href="#servicos"><span class="nav-n">03</span> O que eu levo</a>
+  </nav>
+  <a class="btn btn--solid header-cta" href="https://api.whatsapp.com/send/?phone=5548984239506&amp;text&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+    <span>Entrar em contato</span>
+    <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+  </a>
+</header>
+
+<main>
+  <!-- ============================ HERO (plain) ============================ -->
+  <section class="sec sec--plain hero" id="inicio" data-section>
+    <div class="face-slot face-slot--hero" id="face-hero">
+      <div class="face" id="face">
+        <img src="assets/img/bruno.jpg" alt="Bruno Hoffmann, Product Designer e Design Engineer, retrato em preto e branco" width="800" height="800" fetchpriority="high" decoding="async">
+        <span class="face-fade" aria-hidden="true"></span>
+      </div>
+    </div>
+    <div class="wrap hero-text">
+      <p class="label reveal">Bruno Hoffmann · Product Designer &amp; Design Engineer</p>
+      <h1 class="display hero-thesis reveal">Do dado bruto à <em>interface pronta</em>.</h1>
+      <p class="hero-bridge reveal">Design que entrega</p>
+      <ul class="hero-list">
+        <li class="display reveal">clareza.</li>
+        <li class="display reveal">usabilidade.</li>
+        <li class="display reveal">escala.</li>
+      </ul>
+      <a class="hero-down reveal" href="#sobre">
+        <span class="label">Quem eu sou</span>
+        <span class="hero-down-line" aria-hidden="true"></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================ 01 ABOUT (texture) ============================ -->
+  <section class="sec sec--texture about" id="sobre" data-section>
+    <div class="wrap">
+      <p class="label reveal"><i>01</i> Sobre mim</p>
+      <h2 class="display about-thesis reveal">Eu transformo problemas complexos em <em>experiências simples</em>, da pesquisa ao produto no ar.</h2>
+      <div class="about-body">
+        <figure class="about-photo">
+          <div class="face-slot face-slot--dest" id="face-dest">
+            <img class="face-static" src="assets/img/bruno.jpg" alt="Bruno Hoffmann, retrato em preto e branco" width="800" height="800" loading="lazy" decoding="async">
+          </div>
+          <ul class="stats reveal">
+            <li><b>6+</b><span class="label">anos de experiência</span></li>
+            <li><b>8</b><span class="label">frentes de atuação</span></li>
+            <li><b>E2E</b><span class="label">do discovery ao PR</span></li>
+          </ul>
+        </figure>
+        <div class="about-text">
+          <p class="lead reveal">Prazer, Bruno. Sou Product Designer com cabeça de engenheiro: desenho o produto e entro no código junto com o time.</p>
+          <p class="reveal">Product Designer com mais de 6 anos de experiência, atuando end-to-end no desenvolvimento de produtos digitais para web e mobile. Conduzo UX Strategy, Discovery e arquitetura de User Flows, crio e evoluo Design Systems, e domino o Figma em nível avançado (componentes, variáveis e Auto Layout). Faço o handoff para desenvolvimento acompanhando de perto, com revisão de Pull Requests e QA visual junto ao time de engenharia.</p>
+          <p class="reveal">Utilizo Inteligência Artificial no processo de design com ferramentas como Claude Design, Claude Code e Figma Make, estruturando AI Workflows que aceleram discovery, prototipação, documentação e validação de hipóteses. Minhas decisões são orientadas por pesquisa e métricas (UX Research + Data Driven), com foco em produto e crescimento (priorização, onboarding, conversão, retenção e experimentação via A/B Tests), sempre colaborando com Product Owners, CEOs e equipes multidisciplinares em metodologias ágeis como Scrum e Kanban.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ 02 WORK (plain) ============================ -->
+  <section class="sec sec--plain work" id="projetos" data-section>
+    <div class="wrap">
+      <header class="sec-head reveal">
+        <p class="label"><i>02</i> Projetos</p>
+        <p class="sec-head-note">Seleção · <span id="project-count">02 projetos</span></p>
+      </header>
+      <h2 class="display sec-title reveal">Projetos <em>selecionados</em>.</h2>
+      <div class="projects">
+
+        <article class="project reveal">
+          <button class="project-top" type="button" data-project="mestry" aria-haspopup="dialog">
+            <span class="project-n label">01</span>
+            <span class="project-thumb" aria-hidden="true">
+              <img src="assets/img/projects/mestry-cover.webp" alt="" width="1600" height="1082" loading="lazy" decoding="async">
+            </span>
+            <span class="project-name display">Mestry<span class="project-year">2026</span></span>
+            <span class="project-tags">
+              <span class="project-tag label">Marketing Analytics</span>
+              <span class="project-tag label">SaaS</span>
+              <span class="project-tag label">PRs</span>
+              <span class="project-tag label">IA</span>
+              <span class="project-tag label">Design Engineer</span>
+              <span class="project-tag label">UX</span>
+            </span>
+            <span class="project-go" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+            </span>
+            <span class="sr-only">Abrir o projeto Mestry</span>
+          </button>
+        </article>
+
+        <article class="project reveal">
+          <button class="project-top" type="button" data-project="gotnest" aria-haspopup="dialog">
+            <span class="project-n label">02</span>
+            <span class="project-thumb" aria-hidden="true">
+              <img src="assets/img/projects/gotnest-cover.webp" alt="" width="842" height="924" loading="lazy" decoding="async">
+            </span>
+            <span class="project-name display">Got Nest?<span class="project-year">2025</span></span>
+            <span class="project-tags">
+              <span class="project-tag label">App Mobile</span>
+              <span class="project-tag label">Web</span>
+              <span class="project-tag label">SaaS B2B</span>
+              <span class="project-tag label">IA</span>
+            </span>
+            <span class="project-go" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+            </span>
+            <span class="sr-only">Abrir o projeto Got Nest?</span>
+          </button>
+        </article>
+
+        <article class="project reveal">
+          <button class="project-top" type="button" data-project="bmw" aria-haspopup="dialog">
+            <span class="project-n label">03</span>
+            <span class="project-thumb" aria-hidden="true">
+              <img src="assets/img/projects/bmw-board.webp" alt="" width="1150" height="1202" loading="lazy" decoding="async">
+            </span>
+            <span class="project-name display">BMW Financiamento<span class="project-year">2025</span></span>
+            <span class="project-tags">
+              <span class="project-tag label">Produto financeiro</span>
+              <span class="project-tag label">Portal + Admin</span>
+              <span class="project-tag label">UX/UI</span>
+            </span>
+            <span class="project-go" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+            </span>
+            <span class="sr-only">Abrir o projeto BMW Financiamento</span>
+          </button>
+        </article>
+
+        <article class="project reveal">
+          <button class="project-top" type="button" data-project="dati" aria-haspopup="dialog">
+            <span class="project-n label">04</span>
+            <span class="project-thumb" aria-hidden="true">
+              <img src="assets/img/projects/dati-hero.webp" alt="" width="1110" height="585" loading="lazy" decoding="async">
+            </span>
+            <span class="project-name display">Dati<span class="project-year">2024</span></span>
+            <span class="project-tags">
+              <span class="project-tag label">Comércio exterior</span>
+              <span class="project-tag label">Design System</span>
+              <span class="project-tag label">Processo</span>
+            </span>
+            <span class="project-go" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+            </span>
+            <span class="sr-only">Abrir o projeto Dati</span>
+          </button>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ 03 O QUE EU LEVO PRO TIME (texture) ============================ -->
+  <section class="sec sec--texture services-sec" id="servicos" data-section>
+    <div class="wrap">
+      <p class="label reveal"><i>03</i> O que eu levo pro time</p>
+      <h2 class="display sec-title reveal">Do problema à interface. <em>O processo inteiro, de ponta a ponta.</em></h2>
+      <ol class="services">
+        <li class="service reveal">
+          <span class="service-n label">01</span>
+          <h3 class="service-title">IA aplicada ao Design</h3>
+          <p class="service-sub">Claude Design, Claude Code e Figma Make</p>
+          <p class="service-text">Uso de IA para acelerar discovery, wireframes, protótipos e documentação.</p>
+        </li>
+        <li class="service reveal">
+          <span class="service-n label">02</span>
+          <h3 class="service-title">Design Systems</h3>
+          <p class="service-sub">Escalabilidade para Design e Código</p>
+          <p class="service-text">Criação, evolução e governança de Design Systems integrados ao desenvolvimento.</p>
+        </li>
+        <li class="service reveal">
+          <span class="service-n label">03</span>
+          <h3 class="service-title">UX Strategy &amp; User Flows</h3>
+          <p class="service-sub">Mapeamento completo da experiência</p>
+          <p class="service-text">Construção de jornadas, fluxos e arquitetura antes da interface.</p>
+        </li>
+        <li class="service reveal">
+          <span class="service-n label">04</span>
+          <h3 class="service-title">Figma Avançado</h3>
+          <p class="service-sub">Componentes, Variáveis e Auto Layout</p>
+          <p class="service-text">Domínio avançado do ecossistema Figma para produtos escaláveis.</p>
+        </li>
+        <li class="service reveal">
+          <span class="service-n label">05</span>
+          <h3 class="service-title">Handoff &amp; PRs para Devs</h3>
+          <p class="service-sub">Validação e acompanhamento da implementação</p>
+          <p class="service-text">Especificações claras, revisão de Pull Requests, QA visual e alinhamento contínuo com engenharia.</p>
+        </li>
+        <li class="service reveal">
+          <span class="service-n label">06</span>
+          <h3 class="service-title">Pesquisa &amp; Métricas</h3>
+          <p class="service-sub">UX Research + Data Driven</p>
+          <p class="service-text">Entrevistas, testes de usabilidade, análise de métricas e decisões baseadas em dados.</p>
+        </li>
+        <li class="service reveal">
+          <span class="service-n label">07</span>
+          <h3 class="service-title">AI Workflow &amp; Automações</h3>
+          <p class="service-sub">Fluxos inteligentes de produto</p>
+          <p class="service-text">Criação de pipelines utilizando IA para discovery, documentação, validação e entrega.</p>
+        </li>
+        <li class="service reveal">
+          <span class="service-n label">08</span>
+          <h3 class="service-title">Produto &amp; Crescimento</h3>
+          <p class="service-sub">UX orientado ao negócio</p>
+          <p class="service-text">Discovery, priorização, onboarding, conversão, retenção, experimentação (A/B Tests) e otimização contínua.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============================ FOOTER (plain) ============================ -->
+  <footer class="sec sec--plain footer" id="contato" data-section>
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-call">
+          <h2 class="display footer-title reveal">Tem um projeto?</h2>
+          <p class="footer-lead reveal">Conta pra mim o que o seu produto precisa. Eu respondo rápido e digo com sinceridade se consigo ajudar.</p>
+        </div>
+        <a class="ember reveal" id="ember" href="https://wa.me/5548984239506?text=Oi%20Bruno%2C%20vim%20pelo%20seu%20portf%C3%B3lio." target="_blank" rel="noopener">
+          <canvas class="ember-canvas" aria-hidden="true"></canvas>
+          <span class="ember-ring" aria-hidden="true"></span>
+          <span class="ember-core">
+            <span class="ember-text">Chamar no WhatsApp</span>
+            <svg class="ember-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+      </div>
+      <div class="footer-grid reveal">
+        <div>
+          <p class="label">Contato</p>
+          <a class="link-line" href="https://wa.me/5548984239506" target="_blank" rel="noopener">(48) 9 8423-9506</a>
+        </div>
+        <div>
+          <p class="label">Onde</p>
+          <p>Brasil · Remoto</p>
+        </div>
+        <div>
+          <p class="label">O que</p>
+          <p>Produto, design e código</p>
+        </div>
+        <div>
+          <p class="label">Redes</p>
+          <div class="footer-links">
+            <a class="link-line" href="https://www.linkedin.com/in/brunohoffmaann/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="link-line" href="https://www.instagram.com/brunohoffmaannn/" target="_blank" rel="noopener">Instagram</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-end">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <p class="label">© <span id="year">2026</span> Bruno Hoffmann · Product Designer &amp; Design Engineer</p>
+      </div>
+    </div>
+  </footer>
+</main>
+
+<!-- ============================ PROJECT MODAL ============================ -->
+<div class="project-modal" id="project-modal" hidden>
+  <div class="project-modal-scrim" data-close></div>
+  <div class="project-modal-panel" role="dialog" aria-modal="true" aria-labelledby="cm-title" data-lenis-prevent>
+    <button class="project-modal-close" type="button" data-close aria-label="Fechar projeto">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="project-modal-body" id="project-modal-body"></div>
+  </div>
+</div>
+
+<!-- ---------------------------- project: Mestry ---------------------------- -->
+<template id="project-tpl-mestry">
+  <figure class="cm-hero">
+    <img src="assets/img/projects/mestry-capa.webp" alt="Capa do projeto Mestry: plataforma de marketing analytics e atribuição" width="1600" height="1061" decoding="async">
+  </figure>
+
+  <header class="cm-head">
+    <p class="label"><i>01</i> Projeto de UX / Product Design</p>
+    <h2 class="cm-title" id="cm-title">Mestry</h2>
+    <p class="cm-deck">Transformando complexidade em clareza para decisões de marketing. Plataforma de inteligência e gestão de performance para marketing e mídia paga.</p>
+  </header>
+
+  <dl class="cm-meta">
+    <div><dt class="label">Papel</dt><dd>UX estrategista</dd></div>
+    <div><dt class="label">Frentes</dt><dd>Design system, PRs, testes de usabilidade</dd></div>
+    <div><dt class="label">Ferramentas</dt><dd>Figma, Figma Make, VS Code, IA</dd></div>
+    <div><dt class="label">Produto</dt><dd>SaaS de performance · pt-BR</dd></div>
+  </dl>
+
+  <blockquote class="cm-quote">
+    <p>O desafio não era organizar dados. Era organizar a <b>complexidade</b> para que o usuário pudesse <b>decidir</b>.</p>
+  </blockquote>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>01</i> O contexto</h3>
+    <p class="cm-lede">Quanto mais dados a operação gera, mais difícil fica enxergar o que realmente importa.</p>
+    <p>A Mestry é uma plataforma de inteligência e gestão de performance para marketing e mídia paga. Ela centraliza campanhas, anúncios, vendas, custos, conversões, métricas financeiras e diferentes fontes de mídia em um único lugar.</p>
+    <p>Foi criada para quem opera mídia paga no dia a dia: gestores de tráfego, times de performance e responsáveis por resultado. Essas pessoas trabalham com dados vindos de plataformas diferentes, cada uma com sua própria lógica, nomenclatura e recorte de tempo.</p>
+    <ul class="cm-cards">
+      <li><b>Problema de negócio</b><span>Decisão de mídia depende de leitura rápida. Dado fragmentado atrasa a decisão.</span></li>
+      <li><b>Cenário inicial</b><span>Muita informação disponível, pouca hierarquia entre o que é panorama e o que é detalhe.</span></li>
+    </ul>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>02</i> A dor</h3>
+    <p class="cm-lede">O problema não era falta de dados. Era excesso deles.</p>
+    <ul class="cm-chips">
+      <li>Meta Ads</li><li>Google Ads</li><li>TikTok Ads</li><li>Vendas</li><li>Custos</li>
+      <li>Conversões</li><li>Financeiro</li><li>Campanhas</li><li>Anúncios</li><li>Espaços</li>
+    </ul>
+    <ol class="cm-list">
+      <li>Excesso de informação na mesma camada</li>
+      <li>Dificuldade para encontrar o que é relevante</li>
+      <li>Métricas espalhadas entre áreas do produto</li>
+      <li>Dificuldade de interpretar o resultado</li>
+      <li>Filtros e configurações complexas</li>
+      <li>Falta de hierarquia visual</li>
+      <li>Padrões diferentes para o mesmo tipo de tarefa</li>
+      <li>Dificuldade para transformar dado em decisão</li>
+    </ol>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>03</i> O desafio de UX</h3>
+    <p class="cm-lede">Como reduzir a complexidade percebida sem esconder a complexidade real da operação?</p>
+    <ul class="cm-ticks">
+      <li>Organizar grandes volumes de dados em camadas de leitura</li>
+      <li>Criar hierarquia de informação orientada à decisão</li>
+      <li>Reduzir carga cognitiva sem remover controle</li>
+      <li>Tornar filtros e configurações previsíveis</li>
+      <li>Facilitar comparação de performance entre contextos</li>
+      <li>Criar um sistema visual consistente e escalável</li>
+    </ul>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>04</i> Princípios de design</h3>
+    <p class="cm-lede">O framework que guiou cada decisão.</p>
+    <p>Cinco princípios usados como critério de aceite em revisão de design e em PR.</p>
+    <ul class="cm-cards">
+      <li><b>01 · Clareza antes da complexidade</b><span>Mostrar primeiro o que importa. O resto é acessível, não simultâneo.</span></li>
+      <li><b>02 · Hierarquia orientada à decisão</b><span>A tela responde “o que está acontecendo?” antes de mostrar detalhe.</span></li>
+      <li><b>03 · Consistência</b><span>O mesmo componente se comporta igual em qualquer contexto do produto.</span></li>
+      <li><b>04 · Progressive disclosure</b><span>Complexidade aparece quando é necessária, no ponto em que é necessária.</span></li>
+      <li><b>05 · Dados contam uma história</b><span>Não basta apresentar métricas. É preciso facilitar sua interpretação.</span></li>
+    </ul>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>05</i> Ferramentas e workflow</h3>
+    <p class="cm-lede">Como o trabalho acontecia na prática.</p>
+    <p>Cinco ferramentas, cada uma em um ponto específico do processo. Nenhuma delas substitui a decisão de design.</p>
+    <ol class="cm-steps">
+      <li><b>Enquadrar</b><span>Claude e ChatGPT para transformar um pedido difuso em pergunta de design: mapear fontes de dado, listar o que compete pela atenção do usuário e separar o que é panorama do que é detalhe.</span></li>
+      <li><b>Estruturar</b><span>Arquitetura de informação e redação da microcopy em pt-BR antes de qualquer pixel. O texto da interface é decidido junto com a hierarquia, não depois dela.</span></li>
+      <li><b>Desenhar</b><span>Figma como fonte de verdade: tokens, componentes, estados e as telas compostas a partir deles. Toda tela nova nasce de padrão existente ou promove um padrão novo ao design system.</span></li>
+      <li><b>Prototipar</b><span>Figma Make para tornar a ideia navegável rápido e levar a teste de usabilidade. Interação duvidosa vira protótipo antes de virar especificação.</span></li>
+      <li><b>Entregar e revisar</b><span>VS Code para ler a implementação, ajustar detalhe de token e espaçamento e revisar PR. O design system é verificado no código, não só no arquivo.</span></li>
+    </ol>
+    <p class="cm-note">IA entra para acelerar leitura de problema e exploração. A decisão de hierarquia, de padrão e de o que não entra na tela continua sendo trabalho de design.</p>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>06</i> Decisões de UX</h3>
+    <p class="cm-lede">Quatro decisões e o que elas resolveram.</p>
+    <p>Cada decisão segue a mesma estrutura: problema, contexto, decisão, impacto. Onde não há dado quantitativo, o impacto é declarado de forma qualitativa.</p>
+
+    <article class="cm-dec">
+      <p class="label">Decisão 01 · Domínios</p>
+      <h4>Uma lista longa em que todo item parecia igualmente urgente</h4>
+      <figure class="cm-fig"><img src="assets/img/projects/mestry-dominios.webp" alt="Tabela de domínios da Mestry com badges de status e coluna de última verificação" width="1440" height="1366" loading="lazy" decoding="async"></figure>
+      <dl>
+        <div><dt class="label">Problema</dt><dd>Dezenas de domínios em estados diferentes (ativo, pendente, inválido), sem nada indicando onde havia ação pendente.</dd></div>
+        <div><dt class="label">Contexto</dt><dd>Verificação de domínio é assíncrona: o usuário sai da tela, o estado muda sozinho e ele volta sem saber o que mudou.</dd></div>
+        <div><dt class="label">Decisão</dt><dd>Transformar o estado no eixo principal da tabela: badge com cor semântica, coluna de última verificação em linguagem relativa (“Verificado agora”, “Restam 21h 15min”) e busca e filtro por status no topo.</dd></div>
+        <div><dt class="label">Impacto</dt><dd>Maior clareza na leitura da lista e menos necessidade de reverificar item por item.</dd></div>
+      </dl>
+    </article>
+
+    <article class="cm-dec">
+      <p class="label">Decisão 02 · Funnel builder</p>
+      <h4>Construir o funil e ler a performance dele eram duas tarefas separadas</h4>
+      <figure class="cm-fig"><img src="assets/img/projects/mestry-funnel.webp" alt="Canvas do Funnel Builder da Mestry com etapas no topo e métricas dentro do nó" width="1440" height="1402" loading="lazy" decoding="async"></figure>
+      <dl>
+        <div><dt class="label">Problema</dt><dd>O usuário montava a estrutura em um lugar e conferia o resultado em outro, perdendo a relação entre etapa e desempenho.</dd></div>
+        <div><dt class="label">Contexto</dt><dd>Um funil tem muitas etapas e ofertas. Exibir tudo com o mesmo peso torna o canvas ilegível em poucos nós.</dd></div>
+        <div><dt class="label">Decisão</dt><dd>Um canvas com etapas no topo como âncora de navegação, métrica essencial dentro do nó (visitantes/h, preço por oferta), ponto de estado por item e o painel de estados agregados no canto. Ferramentas de edição concentradas em uma barra inferior, fora do caminho da leitura.</dd></div>
+        <div><dt class="label">Impacto</dt><dd>Estrutura e performance passam a ser lidas no mesmo lugar, sem troca de contexto.</dd></div>
+      </dl>
+    </article>
+
+    <article class="cm-dec">
+      <p class="label">Decisão 03 · Meta de faturamento</p>
+      <h4>A métrica que define o sucesso da operação estava dentro de um relatório</h4>
+      <figure class="cm-fig"><img src="assets/img/projects/mestry-meta.webp" alt="Marco de Meta de Ouro conquistada na Mestry, com confetes e o valor atingido" width="1600" height="883" loading="lazy" decoding="async"></figure>
+      <dl>
+        <div><dt class="label">Problema</dt><dd>Para saber se a operação estava perto ou longe da meta, era preciso abrir uma tela específica e interpretar números.</dd></div>
+        <div><dt class="label">Contexto</dt><dd>Faturamento é o critério de decisão que atravessa todas as áreas do produto e não pertence a nenhuma tela em particular.</dd></div>
+        <div><dt class="label">Decisão</dt><dd>Levar a meta para o chrome global: barra de progresso persistente no topo, com valor atual e alvo sempre visíveis. E fechar o ciclo com um marco explícito quando a meta é batida, em vez de deixar o resultado passar em silêncio.</dd></div>
+        <div><dt class="label">Impacto</dt><dd>O contexto de resultado acompanha o usuário em qualquer área do produto.</dd></div>
+      </dl>
+    </article>
+
+    <article class="cm-dec">
+      <p class="label">Decisão 04 · Configurações</p>
+      <h4>Configuração é onde o excesso de opção mais custa</h4>
+      <figure class="cm-fig"><img src="assets/img/projects/mestry-conta.webp" alt="Tela Minha conta da Mestry com sub-navegação por grupo e leitura como estado padrão" width="1440" height="1205" loading="lazy" decoding="async"></figure>
+      <dl>
+        <div><dt class="label">Problema</dt><dd>Ajustes de conta, segurança e preferências disputavam a mesma tela, sem indicar onde o usuário estava nem o que cada grupo afetava.</dd></div>
+        <div><dt class="label">Contexto</dt><dd>São tarefas raras e de alto risco. O usuário precisa de certeza, não de velocidade.</dd></div>
+        <div><dt class="label">Decisão</dt><dd>Sub-navegação com título e descrição por grupo (“Dados básicos”, “configure seus dados básicos”), leitura como estado padrão e edição como ação explícita em “Editar dados”. O mesmo padrão foi replicado em todas as áreas de configuração.</dd></div>
+        <div><dt class="label">Impacto</dt><dd>Maior previsibilidade e menor risco de alteração acidental.</dd></div>
+      </dl>
+    </article>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>07</i> Design system</h3>
+    <p class="cm-lede">Uma ferramenta de produto, não uma biblioteca visual.</p>
+    <p>Tokens, componentes e estados mantidos em Figma e revisados em código, via PR, junto ao time de desenvolvimento.</p>
+    <ul class="cm-cards">
+      <li><b>Consistência entre áreas</b><span>Um único vocabulário de tabela, filtro, badge e formulário atendendo campanhas, custos, domínios e configurações.</span></li>
+      <li><b>Velocidade de novas telas</b><span>Novas áreas nascem compostas por padrões existentes, reduzindo decisão visual repetida.</span></li>
+      <li><b>Previsibilidade para quem usa</b><span>O mesmo gesto produz o mesmo resultado em qualquer parte do produto.</span></li>
+      <li><b>Manutenção e escala</b><span>Ajuste no token propaga para o produto inteiro, sem retrabalho tela a tela.</span></li>
+    </ul>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>08</i> A solução</h3>
+    <p class="cm-lede">A mesma lógica, da entrada ao detalhe.</p>
+    <div class="cm-gallery">
+      <figure class="cm-shot"><img src="assets/img/projects/mestry-login.webp" alt="Tela de login da Mestry com um único caminho e a prova visual do produto ao lado" width="1440" height="1000" loading="lazy" decoding="async"><figcaption>Entrada: um caminho, uma ação primária</figcaption></figure>
+      <figure class="cm-shot"><img src="assets/img/projects/mestry-dominios.webp" alt="Lista de domínios com estado em primeiro plano, busca e filtro no topo" width="1440" height="1366" loading="lazy" decoding="async"><figcaption>Operação: estado em primeiro plano</figcaption></figure>
+      <figure class="cm-shot"><img src="assets/img/projects/mestry-funnel.webp" alt="Canvas de funil com métrica no nó e ferramentas na barra inferior" width="1440" height="1402" loading="lazy" decoding="async"><figcaption>Construção: métrica dentro do nó</figcaption></figure>
+      <figure class="cm-shot"><img src="assets/img/projects/mestry-cover.webp" alt="Dashboard financeiro, menu de espaços e Funnel Builder da Mestry" width="1600" height="1082" loading="lazy" decoding="async"><figcaption>Panorama: dashboard e espaços</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>09</i> O resultado</h3>
+    <p class="cm-lede">Impacto em três dimensões.</p>
+    <p class="cm-note">Os impactos abaixo são qualitativos. Métricas quantitativas de uso serão adicionadas quando estiverem disponíveis.</p>
+    <ul class="cm-cards">
+      <li><b>Experiência · mais clareza e previsibilidade</b><span>Redução da complexidade percebida e maior clareza na leitura das informações.</span></li>
+      <li><b>Produto · consistente e escalável</b><span>Maior consistência entre fluxos e menor dependência de padrões diferentes para a mesma tarefa.</span></li>
+      <li><b>Negócio · suporte à decisão</b><span>A informação que sustenta a decisão de mídia fica disponível no momento em que ela acontece.</span></li>
+    </ul>
+  </section>
+
+  <section class="cm-sec cm-sec--take">
+    <h3 class="cm-h"><i>10</i> Aprendizados</h3>
+    <ol class="cm-list cm-list--lead">
+      <li>Em produtos orientados a dados, mostrar menos não significa simplificar. A simplificação real está em organizar a informação certa no momento certo.</li>
+      <li>Design system não é consistência visual. É uma ferramenta para escalar decisões de UX.</li>
+      <li>Quanto mais complexo o produto, mais cedo a hierarquia de informação precisa ser decidida.</li>
+    </ol>
+  </section>
+
+  <p class="cm-outro">Complexidade nos bastidores. Clareza na frente.</p>
+</template>
+
+<!-- ---------------------------- project: Got Nest? ---------------------------- -->
+<template id="project-tpl-gotnest">
+  <figure class="cm-hero cm-hero--light">
+    <img src="assets/img/projects/gotnest-cover.webp" alt="App Got Nest? em dois iPhones sobre fundo azul" width="842" height="924" decoding="async">
+  </figure>
+
+  <header class="cm-head">
+    <p class="label"><i>02</i> Projeto de Product / UX Design</p>
+    <h2 class="cm-title" id="cm-title">Got Nest?</h2>
+    <p class="cm-deck">Conectando compradores e corretores no mercado do Texas. Uma plataforma imobiliária que reúne, em um só produto, a descoberta de imóveis pelo comprador e a operação de relacionamento do corretor.</p>
+  </header>
+
+  <dl class="cm-meta">
+    <div><dt class="label">Papel</dt><dd>Product / UX Designer</dd></div>
+    <div><dt class="label">Plataforma</dt><dd>App mobile · Buyer + Agent</dd></div>
+    <div><dt class="label">Mercado</dt><dd>Texas, EUA</dd></div>
+    <div><dt class="label">Escopo</dt><dd>Discovery → UI → handoff</dd></div>
+  </dl>
+
+  <blockquote class="cm-quote">
+    <p>Dois usuários, uma jornada, <b>um produto</b>.</p>
+    <cite>O comprador descobre. O corretor atende. As duas experiências vivem no mesmo app e compartilham o mesmo contexto.</cite>
+  </blockquote>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>01</i> Contexto</h3>
+    <p class="cm-lede">Um mercado grande, fragmentado e movido a relacionamento.</p>
+    <figure class="cm-fig cm-fig--phone"><img src="assets/img/projects/gotnest-jornada.webp" alt="Tela de abertura do Got Nest com os dois perfis do produto" width="283" height="628" loading="lazy" decoding="async"></figure>
+    <ul class="cm-cards">
+      <li><b>O que é a Got Nest</b><span>Plataforma imobiliária que atende dois lados no mesmo produto: o comprador que procura casa e o corretor que gerencia carteira, leads e negociações.</span></li>
+      <li><b>Mercado do Texas</b><span>Alto volume de transações distribuídas entre muitas cidades e corretores independentes. A decisão de compra depende de informação local: imposto, HOA, risco de alagamento, tempo de listagem.</span></li>
+      <li><b>Problema de negócio</b><span>A descoberta acontece em um lugar e o relacionamento em outro. Entre o interesse do comprador e o fechamento, o contexto se perde, e com ele a conversão.</span></li>
+      <li><b>Meu papel</b><span>Responsável pelo desenho de produto ponta a ponta: enquadramento do problema, discovery, arquitetura de informação, fluxos, UI final e handoff com desenvolvimento.</span></li>
+    </ul>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>02</i> O problema</h3>
+    <p class="cm-lede">O ecossistema quebra no meio do caminho.</p>
+    <ol class="cm-chain">
+      <li><b>Buyer</b><span>Busca, salva e compara imóveis</span></li>
+      <li><b>Property</b><span>Dados que sustentam a decisão</span></li>
+      <li><b>Agent</b><span>Atende, negocia e acompanha</span></li>
+      <li><b>Conversion</b><span>Visita, proposta, fechamento</span></li>
+    </ol>
+    <div class="cm-split">
+      <div>
+        <p class="label">Dores do comprador</p>
+        <ul class="cm-ticks cm-ticks--pain">
+          <li>Listagens parecidas, sem os dados que realmente decidem a compra.</li>
+          <li>Recomeça a busca do zero a cada sessão; nada aprende com suas preferências.</li>
+          <li>Falar com um corretor exige sair do fluxo de descoberta.</li>
+        </ul>
+      </div>
+      <div>
+        <p class="label">Dores do corretor</p>
+        <ul class="cm-ticks cm-ticks--pain">
+          <li>Lead chega sem contexto: não sabe o que a pessoa já viu ou quer.</li>
+          <li>Conversa, carteira e documentos vivem em ferramentas separadas.</li>
+          <li>Tempo consumido por trabalho operacional, não por negociação.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>03</i> Discovery</h3>
+    <p class="cm-lede">Entender os dois lados antes de desenhar qualquer tela.</p>
+    <ul class="cm-cards">
+      <li><b>Research</b><span>Conversas e leitura do comportamento de busca dos dois perfis.</span></li>
+      <li><b>Benchmark</b><span>Portais de listagem e CRMs imobiliários: o que cada categoria resolve bem.</span></li>
+      <li><b>User journey</b><span>Jornada mapeada em paralelo: comprador e corretor, mesmo eixo de tempo.</span></li>
+      <li><b>Insights</b><span>Padrões que definiram o que entrava e o que ficava fora do escopo.</span></li>
+    </ul>
+    <h4 class="cm-h4">Insights que direcionaram o produto</h4>
+    <ul class="cm-cards cm-cards--insights">
+      <li><b>Confiança vem do dado, não da foto.</b><span>Imposto, HOA, tempo de listagem e risco climático mudam a decisão mais do que a galeria de imagens.</span></li>
+      <li><b>A conversa é a etapa de decisão.</b><span>O comprador escolhe negociando com o corretor. O chat precisava carregar o imóvel, não só o texto.</span></li>
+      <li><b>O corretor precisa de contexto, não de mais telas.</b><span>Histórico do lead, imóveis salvos e documentos no mesmo lugar reduzem o trabalho de reconstruir a história.</span></li>
+    </ul>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>04</i> Solução</h3>
+    <p class="cm-lede">De insight a decisão de produto.</p>
+    <ol class="cm-steps cm-steps--solve">
+      <li><b>Product strategy</b><span>Um produto com dois modos de uso em vez de dois apps. A carteira do corretor é alimentada pelo comportamento do comprador.</span><em>Resolve: a perda de contexto entre descoberta e atendimento.</em></li>
+      <li><b>Arquitetura de informação</b><span>Quatro destinos fixos por perfil (Home, Lead, Property List, Chat) e hierarquia de dados do imóvel em Feature / Gallery / Calculator.</span><em>Resolve: navegação previsível em um produto com muitos dados.</em></li>
+      <li><b>User flows</b><span>Interesse do comprador gera um lead com histórico. O corretor entra na conversa já sabendo o que foi visto e salvo.</span><em>Resolve: lead frio e primeira mensagem genérica.</em></li>
+      <li><b>Wireframes</b><span>Estrutura testada em baixa fidelidade antes da UI: densidade do dashboard, ordem dos blocos do imóvel, formato do card no chat.</span><em>Resolve: discussão de layout antes da discussão de estilo.</em></li>
+      <li><b>Final UI</b><span>Sistema de cards, um azul de marca para ação e estado, tipografia em duas escalas e estados vazios tratados como parte do produto.</span><em>Resolve: leitura rápida de números e status na operação diária.</em></li>
+    </ol>
+
+    <article class="cm-dec">
+      <p class="label">Decisão de UI · estado vazio</p>
+      <h4>Conta pendente de aprovação continua sendo um produto útil</h4>
+      <figure class="cm-fig cm-fig--phone"><img src="assets/img/projects/gotnest-pendente.webp" alt="Dashboard do Got Nest desativado, com aviso de conta pendente e os próximos passos" width="247" height="617" loading="lazy" decoding="async"></figure>
+      <p>Em vez de bloquear a tela, o dashboard aparece desativado com os próximos passos disponíveis: completar perfil ou falar com suporte. O corretor entende onde está e o que fazer.</p>
+    </article>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>05</i> AI-powered design</h3>
+    <p class="cm-lede">IA como amplificação do processo, não como decisão.</p>
+    <p>Usei IA para acelerar exploração, análise e transição entre design e código. O julgamento sobre o que entrava no produto permaneceu meu.</p>
+    <ol class="cm-chain">
+      <li><b>Problem</b><span>Enquadrar a pergunta certa</span></li>
+      <li><b>AI exploration</b><span>Ampliar o leque de alternativas</span></li>
+      <li><b>Designer decision</b><span>Critério, corte e responsabilidade</span></li>
+      <li><b>Solution</b><span>Decisão implementada no produto</span></li>
+    </ol>
+    <ul class="cm-cards">
+      <li><b>Claude</b><span>Pesquisa, exploração de hipóteses, análise de problemas e geração de alternativas antes de abrir o Figma.</span></li>
+      <li><b>Figma / Figma Make</b><span>Prototipação rápida, exploração de interfaces e validação de conceitos com pouco custo.</span></li>
+      <li><b>VS Code + IA</b><span>Transformação do design em código, criação de componentes, ajustes de front-end e experimentação direta na interface real.</span></li>
+      <li><b>Pull requests</b><span>Apoio na criação, revisão e documentação de PRs, melhorando a comunicação entre design e desenvolvimento.</span></li>
+      <li><b>Design insights</b><span>Identificação de padrões, exploração de soluções e apoio à decisão de UX, inclusive dentro do próprio produto, como o assistente que sugere respostas ao corretor no chat.</span></li>
+    </ul>
+
+    <article class="cm-dec">
+      <p class="label">Exemplo no produto</p>
+      <h4>O assistente sugere; o corretor decide o que enviar</h4>
+      <figure class="cm-fig cm-fig--phone"><img src="assets/img/projects/gotnest-chat-card.webp" alt="Chat do Got Nest com cards de imóvel e o campo do assistente de IA" width="274" height="603" loading="lazy" decoding="async"></figure>
+      <p>A mesma lógica do meu processo virou princípio de interface: a IA propõe a resposta e o próximo passo, mas nunca envia nada sozinha.</p>
+    </article>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>06</i> Final product</h3>
+    <p class="cm-lede">Duas experiências, um sistema.</p>
+
+    <h4 class="cm-h4">Buyer <span>Search → Property → Recommendations → Contact</span></h4>
+    <div class="cm-gallery cm-gallery--phones">
+      <figure class="cm-shot"><img src="assets/img/projects/gotnest-imovel.webp" alt="Ficha do imóvel com preço, dados fiscais, risco e features" width="274" height="840" loading="lazy" decoding="async"><figcaption>Imóvel com preço, dados fiscais, risco e features na mesma leitura</figcaption></figure>
+      <figure class="cm-shot"><img src="assets/img/projects/gotnest-lead.webp" alt="Perfil do lead com imóveis salvos, timeline e documentos" width="209" height="780" loading="lazy" decoding="async"><figcaption>Imóveis salvos, histórico e documentos formam o contexto do lead</figcaption></figure>
+      <figure class="cm-shot"><img src="assets/img/projects/gotnest-login.webp" alt="Tela de login do Got Nest com a mascote Jay" width="266" height="589" loading="lazy" decoding="async"><figcaption>Entrada curta, com a marca fazendo o trabalho de tom</figcaption></figure>
+    </div>
+
+    <h4 class="cm-h4">Agent <span>Dashboard → Leads → CRM → Conversations → Follow-up</span></h4>
+    <p>O dashboard responde três perguntas em ordem: como estou contra a meta, o que está em aberto e quem precisa de resposta agora.</p>
+    <div class="cm-gallery cm-gallery--phones">
+      <figure class="cm-shot"><img src="assets/img/projects/gotnest-dashboard.webp" alt="Dashboard do corretor com meta, pipeline e leads na primeira tela" width="254" height="734" loading="lazy" decoding="async"><figcaption>Meta, pipeline e leads na primeira tela</figcaption></figure>
+      <figure class="cm-shot"><img src="assets/img/projects/gotnest-conversas.webp" alt="Lista de conversas ordenada por urgência" width="302" height="668" loading="lazy" decoding="async"><figcaption>Conversas ordenadas por urgência, não por ordem de chegada</figcaption></figure>
+      <figure class="cm-shot"><img src="assets/img/projects/gotnest-chat-card.webp" alt="Card de imóvel dentro da conversa do chat" width="274" height="603" loading="lazy" decoding="async"><figcaption>O imóvel viaja dentro da conversa como card negociável</figcaption></figure>
+      <figure class="cm-shot"><img src="assets/img/projects/gotnest-perfil.webp" alt="Perfil do corretor com agenda, documentos e integrações" width="291" height="683" loading="lazy" decoding="async"><figcaption>Perfil concentra agenda, documentos e integrações do corretor</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>07</i> Impact</h3>
+    <p class="cm-lede">O que muda para cada lado.</p>
+    <ul class="cm-cards">
+      <li><b>Buyer</b><span>Descoberta mais simples e personalizada: menos telas para entender um imóvel e um caminho direto para falar com quem vende.</span></li>
+      <li><b>Agent</b><span>Mais contexto sobre cada lead e menos trabalho operacional para reunir histórico, imóveis e documentos.</span></li>
+      <li><b>Business</b><span>Conexão contínua entre descoberta, relacionamento e conversão dentro do mesmo produto.</span></li>
+    </ul>
+  </section>
+
+  <section class="cm-sec cm-sec--take">
+    <h3 class="cm-h"><i>08</i> Learning</h3>
+    <p class="cm-lede">O que levo para o próximo produto.</p>
+    <ol class="cm-list cm-list--lead">
+      <li>Em ecossistemas com dois lados, o produto não é a soma de duas interfaces: é o que atravessa as duas. Desenhar a passagem de contexto foi mais determinante que desenhar telas.</li>
+      <li>IA encurta a distância entre hipótese e artefato, o que aumenta o valor do critério. Quanto mais alternativas ela gera, mais claro precisa estar o motivo do corte.</li>
+      <li>Estar perto do código mudou as decisões de design. Testar componentes no produto real evitou soluções bonitas no Figma e frágeis na operação diária.</li>
+    </ol>
+  </section>
+
+  <p class="cm-outro">Got Nest · Projeto de Product / UX Design</p>
+</template>
+
+<!-- ---------------------------- project: BMW Financiamento ---------------------------- -->
+<template id="project-tpl-bmw">
+  <figure class="cm-hero cm-hero--bmw">
+    <img src="assets/img/projects/bmw-hero.webp" alt="BMW M em azul, abertura do projeto de financiamento" width="736" height="1308" decoding="async">
+  </figure>
+
+  <header class="cm-head">
+    <p class="label"><i>03</i> Projeto · Produto financeiro · 2026</p>
+    <h2 class="cm-title" id="cm-title">BMW Financiamento</h2>
+    <p class="cm-deck">Financiamento BMW, do balcão ao digital. Adaptação do fluxo internacional de solicitação de financiamento da BMW para o mercado brasileiro: simulação, contratação e acompanhamento em um só portal.</p>
+  </header>
+
+  <dl class="cm-meta">
+    <div><dt class="label">Papel</dt><dd>UX/UI Designer</dd></div>
+    <div><dt class="label">Escopo</dt><dd>Portal cliente + admin</dd></div>
+    <div><dt class="label">Duração</dt><dd>6 semanas</dd></div>
+    <div><dt class="label">Entrega</dt><dd>6 PRs em produção</dd></div>
+  </dl>
+
+  <section class="cm-sec">
+    <figure class="cm-fig"><img src="assets/img/projects/bmw-board.webp" alt="Telas do portal BMW: login, dashboard e central de pagamentos" width="1150" height="1202" loading="lazy" decoding="async"></figure>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h">Objetivo</h3>
+    <p>O projeto teve como objetivo analisar e adaptar o fluxo internacional de solicitação de financiamento da BMW para o mercado brasileiro, mantendo a experiência premium da marca com uma navegação simples, intuitiva e digitalizada.</p>
+    <p>O sistema permite simular financiamentos, preencher um formulário em etapas, enviar documentos, acompanhar o status da análise de crédito e receber notificações automáticas. Na área administrativa, o gestor pode visualizar solicitações, filtrar dados e acessar informações detalhadas de cada cliente.</p>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>Etapa 01</i> Benchmark de financiamento</h3>
+    <p class="cm-lede">Cinco mercados pelo mesmo recorte: quantas etapas o cliente atravessa, quanto do processo é digital e onde a concessionária entra.</p>
+      <article class="cm-bench">
+        <header>
+          <h4><span class="cm-flag" aria-hidden="true">🇧🇷</span>Brasil</h4>
+          <p class="cm-meter"><span class="label">Digitalização</span><span class="cm-meter-bars" aria-hidden="true"><i></i><i></i><i class="is-off"></i></span><b>Parcial</b></p>
+        </header>
+        <ol class="cm-chips cm-chips--flow">
+          <li>Simulação online</li>
+          <li>Escolha do produto</li>
+          <li>Contato com concessionária</li>
+          <li>Análise de crédito</li>
+          <li>Assinatura de contrato</li>
+          <li>Portal e boletos</li>
+        </ol>
+        <dl>
+          <div><dt class="label">Concessionária</dt><dd>Central, conduz análise e fechamento</dd></div>
+          <div><dt class="label">Produto local</dt><dd>CDC tradicional, prazos flexíveis e antecipação</dd></div>
+          <div><dt class="label">Pós-venda</dt><dd>Portal BMW Serviços Financeiros: 2ª via e quitação</dd></div>
+        </dl>
+      </article>
+      <article class="cm-bench">
+        <header>
+          <h4><span class="cm-flag" aria-hidden="true">🇪🇸</span>Espanha</h4>
+          <p class="cm-meter"><span class="label">Digitalização</span><span class="cm-meter-bars" aria-hidden="true"><i></i><i></i><i></i></span><b>Alta</b></p>
+        </header>
+        <ol class="cm-chips cm-chips--flow">
+          <li>Escolha do veículo</li>
+          <li>Seleção do produto</li>
+          <li>Formulário e-finance</li>
+          <li>Aprovação de crédito</li>
+          <li>Assinatura eletrônica</li>
+        </ol>
+        <dl>
+          <div><dt class="label">Concessionária</dt><dd>Parcial, atua apenas na entrega</dd></div>
+          <div><dt class="label">Produto local</dt><dd>Renting e leasing operacional</dd></div>
+          <div><dt class="label">Pós-venda</dt><dd>Portal BMW Financial Services: contratos</dd></div>
+        </dl>
+      </article>
+      <article class="cm-bench">
+        <header>
+          <h4><span class="cm-flag" aria-hidden="true">🇬🇧</span>Reino Unido</h4>
+          <p class="cm-meter"><span class="label">Digitalização</span><span class="cm-meter-bars" aria-hidden="true"><i></i><i></i><i></i></span><b>Alta</b></p>
+        </header>
+        <ol class="cm-chips cm-chips--flow">
+          <li>Configurar carro online</li>
+          <li>Escolher financiamento</li>
+          <li>Cotação TAE</li>
+          <li>Aplicação online</li>
+          <li>Assinatura digital</li>
+        </ol>
+        <dl>
+          <div><dt class="label">Concessionária</dt><dd>Reduzido, opcional no fechamento</dd></div>
+          <div><dt class="label">Produto local</dt><dd>PCP, HP e balloon finance</dd></div>
+          <div><dt class="label">Pós-venda</dt><dd>MyBMW Finance: acompanhamento e quitação</dd></div>
+        </dl>
+      </article>
+      <article class="cm-bench">
+        <header>
+          <h4><span class="cm-flag" aria-hidden="true">🇺🇸</span>Estados Unidos</h4>
+          <p class="cm-meter"><span class="label">Digitalização</span><span class="cm-meter-bars" aria-hidden="true"><i></i><i></i><i class="is-off"></i></span><b>Média</b></p>
+        </header>
+        <ol class="cm-chips cm-chips--flow">
+          <li>Escolha do veículo</li>
+          <li>Aplicação online ou no dealer</li>
+          <li>Consulta de crédito</li>
+          <li>Oferta de condições</li>
+          <li>Assinatura e entrega</li>
+        </ol>
+        <dl>
+          <div><dt class="label">Concessionária</dt><dd>Forte, peça central na finalização</dd></div>
+          <div><dt class="label">Produto local</dt><dd>BMW Select (balloon), lease e financing</dd></div>
+          <div><dt class="label">Pós-venda</dt><dd>BMW Financial Services: pagamentos, extratos e upgrades</dd></div>
+        </dl>
+      </article>
+      <article class="cm-bench">
+        <header>
+          <h4><span class="cm-flag" aria-hidden="true">🇵🇹</span>Portugal</h4>
+          <p class="cm-meter"><span class="label">Digitalização</span><span class="cm-meter-bars" aria-hidden="true"><i></i><i></i><i class="is-off"></i></span><b>Média</b></p>
+        </header>
+        <ol class="cm-chips cm-chips--flow">
+          <li>Simulação online</li>
+          <li>Escolha do produto</li>
+          <li>Análise de crédito</li>
+          <li>Contrato e entrega</li>
+        </ol>
+        <dl>
+          <div><dt class="label">Concessionária</dt><dd>Central, coordena o processo</dd></div>
+          <div><dt class="label">Produto local</dt><dd>Leasing operacional e renting (B2B e B2C)</dd></div>
+          <div><dt class="label">Pós-venda</dt><dd>Portal BMW Portugal Finance: consultas e gestão</dd></div>
+        </dl>
+      </article>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>Processo</i> Como o projeto foi conduzido</h3>
+    <p class="cm-lede">Seis etapas, cada uma com as ferramentas usadas e o que saiu dela. A IA entra como acelerador de pesquisa, protótipo e código. A decisão de produto continua sendo minha.</p>
+    <ol class="cm-steps">
+        <li>
+          <b>Descoberta</b>
+          <span>Leitura dos fluxos de financiamento da BMW em cinco países e das reclamações de clientes brasileiros sobre o processo atual.</span>
+          <ul class="cm-chips cm-chips--sm"><li>ChatGPT (deep research)</li><li>Claude (síntese)</li><li>Notion</li></ul>
+          <em>Saída · Matriz de benchmark</em>
+        </li>
+        <li>
+          <b>Enquadramento</b>
+          <span>Definição do problema, das jornadas prioritárias e dos critérios de sucesso junto com produto e crédito.</span>
+          <ul class="cm-chips cm-chips--sm"><li>FigJam</li><li>Claude (jobs to be done)</li></ul>
+          <em>Saída · Escopo e métricas</em>
+        </li>
+        <li>
+          <b>Estrutura</b>
+          <span>Arquitetura de telas, fluxo do formulário em etapas e regras de estado (em análise, aprovado, vencido).</span>
+          <ul class="cm-chips cm-chips--sm"><li>Figma</li><li>FigJam</li><li>Whimsical</li></ul>
+          <em>Saída · Wireframes e work flow</em>
+        </li>
+        <li>
+          <b>Interface</b>
+          <span>UI premium com variables do Figma, componentes responsivos e conteúdo escrito para reduzir dúvida na hora de contratar.</span>
+          <ul class="cm-chips cm-chips--sm"><li>Figma</li><li>Figma Make</li><li>Claude (microcopy)</li></ul>
+          <em>Saída · UI kit e protótipo</em>
+        </li>
+        <li>
+          <b>Validação</b>
+          <span>Teste não moderado com oito participantes no protótipo navegável, mais cinco sessões moderadas com clientes de financiamento ativo.</span>
+          <ul class="cm-chips cm-chips--sm"><li>Maze</li><li>Figma Make</li><li>Dovetail</li></ul>
+          <em>Saída · Relatório de usabilidade</em>
+        </li>
+        <li>
+          <b>Handoff</b>
+          <span>Entrega em código: tokens e componentes gerados a partir do Figma, revisados por mim e abertos como pull requests fatiados por fluxo.</span>
+          <ul class="cm-chips cm-chips--sm"><li>Claude Code</li><li>Storybook</li><li>Linear</li><li>GitHub</li></ul>
+          <em>Saída · 6 PRs revisados</em>
+        </li>
+    </ol>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>Arquitetura</i> Work flow do portal</h3>
+    <p class="cm-lede">Do cadastro à gestão do contrato. Cada bloco virou uma tela ou modal no protótipo.</p>
+    <ol class="cm-flow">
+        <li>
+          <div><span class="label">Entrada</span><b>Conta e perfil</b></div>
+          <ul class="cm-chips"><li>Configuração de perfil</li><li>Dados cadastrais</li><li>Preferência de notificações</li><li>Tela de perfil do usuário</li></ul>
+        </li>
+        <li>
+          <div><span class="label">Núcleo</span><b>Meus veículos</b></div>
+          <ul class="cm-chips"><li>Listagem de veículos do cliente</li><li>Tela inicial do contrato</li><li>Progresso das parcelas</li><li>Status de gravame</li></ul>
+        </li>
+        <li>
+          <div><span class="label">Ações</span><b>Pagamento e negociação</b></div>
+          <ul class="cm-chips"><li>Visualização de boletos</li><li>Simular antecipação</li><li>Solicitar refinanciamento</li><li>Modais de aviso e sugestão</li></ul>
+        </li>
+        <li>
+          <div><span class="label">Serviços</span><b>Solicitações</b></div>
+          <ul class="cm-chips"><li>Tela de solicitações</li><li>Autorização de viagem internacional</li><li>Visualização de contratos</li><li>Tela de notificações</li></ul>
+        </li>
+    </ol>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>Entrega</i> Os PRs</h3>
+    <p class="cm-lede">O design saiu do Figma em pull requests fatiados por fluxo, cada um com escopo fechado, protótipo de referência e critério de aceite.</p>
+    <ol class="cm-prs">
+        <li>
+          <span class="cm-pr-id label">PR 01</span>
+          <div class="cm-pr-main"><b>Design tokens</b><span>Cores, tipografia, espaçamento e raio exportados do Figma</span></div>
+          <span class="cm-pr-aceite">Paridade visual com o kit em Storybook</span>
+          <span class="cm-pr-status">Merged</span>
+        </li>
+        <li>
+          <span class="cm-pr-id label">PR 02</span>
+          <div class="cm-pr-main"><b>Componentes base</b><span>Botão, campo, card, tabela, modal e estados</span></div>
+          <span class="cm-pr-aceite">Cobertura de estados e foco por teclado</span>
+          <span class="cm-pr-status">Merged</span>
+        </li>
+        <li>
+          <span class="cm-pr-id label">PR 03</span>
+          <div class="cm-pr-main"><b>Dashboard do cliente</b><span>Boas-vindas, banners de oferta e resumo de pagamento</span></div>
+          <span class="cm-pr-aceite">Carrega em até 2s com dados reais</span>
+          <span class="cm-pr-status">Merged</span>
+        </li>
+        <li>
+          <span class="cm-pr-id label">PR 04</span>
+          <div class="cm-pr-main"><b>Solicitação de financiamento</b><span>Formulário em etapas, upload de documentos e resumo</span></div>
+          <span class="cm-pr-aceite">Rascunho salvo a cada etapa</span>
+          <span class="cm-pr-status">Merged</span>
+        </li>
+        <li>
+          <span class="cm-pr-id label">PR 05</span>
+          <div class="cm-pr-main"><b>Central de pagamentos</b><span>Faturas, histórico, 2ª via e simulação de antecipação</span></div>
+          <span class="cm-pr-aceite">Valores conferem com o extrato do sistema</span>
+          <span class="cm-pr-status is-review">Em review</span>
+        </li>
+        <li>
+          <span class="cm-pr-id label">PR 06</span>
+          <div class="cm-pr-main"><b>Área administrativa</b><span>Fila de solicitações, filtros e detalhe do cliente</span></div>
+          <span class="cm-pr-aceite">Filtro por status e período em uma ação</span>
+          <span class="cm-pr-status is-review">Em review</span>
+        </li>
+    </ol>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>Resultado</i> Telas finais</h3>
+    <p class="cm-lede">Sete telas do portal do cliente, do login à solicitação de serviços.</p>
+    <figure class="cm-fig">
+      <img src="assets/img/projects/bmw-dashboard.webp" alt="Dashboard do cliente com boas-vindas, banners e resumo de pagamentos" width="1500" height="934" loading="lazy" decoding="async">
+      <figcaption><i>01</i> Dashboard: boas-vindas, ofertas e resumo do contrato, com tour de primeiro acesso</figcaption>
+    </figure>
+    <div class="cm-gallery">
+        <figure class="cm-shot"><img src="assets/img/projects/bmw-login.webp" alt="Tela de início de sessão BMW ID" width="1358" height="854" loading="lazy" decoding="async"><figcaption><i>02</i> Login BMW ID: entrada única com e-mail ou conta Apple, Google e Facebook</figcaption></figure>
+        <figure class="cm-shot"><img src="assets/img/projects/bmw-veiculo.webp" alt="Detalhe do contrato do veículo com parcelas e boletos" width="1312" height="1030" loading="lazy" decoding="async"><figcaption><i>03</i> Meu veículo: status do pagamento, progresso das parcelas e acesso aos boletos</figcaption></figure>
+        <figure class="cm-shot"><img src="assets/img/projects/bmw-pagamentos.webp" alt="Central de pagamentos com fatura em aberto" width="1114" height="862" loading="lazy" decoding="async"><figcaption><i>04</i> Central de pagamentos: faturas em aberto, filtro por carro e pagamento em uma ação</figcaption></figure>
+        <figure class="cm-shot"><img src="assets/img/projects/bmw-solicitacoes.webp" alt="Dashboard com menu de solicitações aberto" width="1228" height="766" loading="lazy" decoding="async"><figcaption><i>05</i> Solicitações: menu de serviços: segunda via, formulário de viagem e histórico</figcaption></figure>
+        <figure class="cm-shot"><img src="assets/img/projects/bmw-formulario.webp" alt="Formulário de autorização de viagem internacional" width="1128" height="1158" loading="lazy" decoding="async"><figcaption><i>06</i> Viagem internacional: formulário em etapas com dados do condutor, veículo e documentos</figcaption></figure>
+        <figure class="cm-shot"><img src="assets/img/projects/bmw-simulacao.webp" alt="Simulação de financiamento com modal de solicitação enviada" width="1500" height="935" loading="lazy" decoding="async"><figcaption><i>07</i> Simulação e confirmação: simulação do financiamento e confirmação do envio da solicitação</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>Stack</i> Ferramentas usadas</h3>
+    <p class="cm-lede">Pesquisa, desenho, protótipo e código.</p>
+    <ul class="cm-tools">
+        <li><span class="cm-tool-box"><img src="assets/img/projects/tool-claude.webp" alt="Logo Claude" width="256" height="255" loading="lazy" decoding="async"></span><b>Claude</b></li>
+        <li><span class="cm-tool-box"><img src="assets/img/projects/tool-figma.webp" alt="Logo Figma" width="256" height="256" loading="lazy" decoding="async"></span><b>Figma</b></li>
+        <li><span class="cm-tool-box"><img src="assets/img/projects/tool-figma-make.webp" alt="Logo Figma Make" width="256" height="276" loading="lazy" decoding="async"></span><b>Figma Make</b></li>
+        <li><span class="cm-tool-box"><img src="assets/img/projects/tool-chatgpt.webp" alt="Logo ChatGPT" width="256" height="256" loading="lazy" decoding="async"></span><b>ChatGPT</b></li>
+        <li><span class="cm-tool-box"><img src="assets/img/projects/tool-vscode.webp" alt="Logo VS Code" width="256" height="183" loading="lazy" decoding="async"></span><b>VS Code</b></li>
+    </ul>
+  </section>
+</template>
+
+<!-- ---------------------------- projeto: Dati ---------------------------- -->
+<template id="project-tpl-dati">
+  <figure class="cm-hero">
+    <img src="assets/img/projects/dati-hero.webp" alt="Processo de importação da Dati na web e no celular, tema escuro" width="1110" height="585" decoding="async">
+  </figure>
+
+  <header class="cm-head">
+    <p class="label"><i>04</i> Projeto · Dati Tecnologia · 2023 a 2025</p>
+    <h2 class="cm-title" id="cm-title">Organizar para escalar</h2>
+    <p class="cm-deck">Junto com o time de design, estruturei o Figma, o design system e o processo da Dati, plataforma de comércio exterior com IA.</p>
+  </header>
+
+  <dl class="cm-meta">
+    <div><dt class="label">Papel</dt><dd>UI/UX Designer</dd></div>
+    <div><dt class="label">Período</dt><dd>2023 a 2025</dd></div>
+    <div><dt class="label">Empresa</dt><dd>Dati Tecnologia · Florianópolis</dd></div>
+    <div><dt class="label">Entregas</dt><dd>6 produtos · web e mobile</dd></div>
+  </dl>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>Objetivos</i> Três objetivos, três resultados</h3>
+    <ul class="cm-cards">
+      <li><b>01 · Figma</b><span>Acelerar a passagem do design para o desenvolvimento.</span></li>
+      <li><b>02 · Design system</b><span>Ter uma interface única em todos os produtos.</span></li>
+      <li><b>03 · Processo</b><span>Parar de corrigir fluxos depois de prontos.</span></li>
+    </ul>
+    <ul class="cm-stats">
+      <li><b>−50%</b><span>no tempo médio gasto pelo desenvolvimento</span></li>
+      <li><b>1.200</b><span>componentes próprios, nos temas claro e escuro</span></li>
+      <li><b>−50%</b><span>de alterações em fluxos já em produção</span></li>
+    </ul>
+    <p class="cm-award"><span class="label">Reconhecimento</span><b>Destaque ASTech</b><span>Startup revelação no maior evento de comércio exterior do Brasil.</span></p>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>Telas</i> Do desktop ao celular</h3>
+    <p class="cm-lede">Times de comércio exterior acompanham custos, prazos e documentos de cada importação, nos temas claro e escuro.</p>
+    <figure class="cm-fig">
+      <img src="assets/img/projects/dati-dashboard.webp" alt="Dashboard de importação da Dati no tema claro" width="1035" height="515" loading="lazy" decoding="async">
+      <figcaption>Dashboard de importação · tema claro</figcaption>
+    </figure>
+    <figure class="cm-fig">
+      <img src="assets/img/projects/dati-mobile.webp" alt="Quatro telas do app da Dati: seleção de empresa, resumo do importador nos dois temas e lista de processos" width="1035" height="585" loading="lazy" decoding="async">
+      <figcaption>Seleção de empresa, resumo do importador e processos, nos dois temas</figcaption>
+    </figure>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>Objetivo 01 · Figma</i> Um Figma que o desenvolvimento consegue ler</h3>
+    <ul class="cm-cards">
+      <li><b>Objetivo</b><span>Fazer o desenvolvimento encontrar e entender as telas mais rápido.</span></li>
+      <li><b>O que fizemos</b><span>Uma capa padrão em cada projeto e fluxos agrupados por jornada e por modal.</span></li>
+      <li class="is-result"><b>−50%</b><span>no tempo médio gasto pelos times de desenvolvimento</span></li>
+    </ul>
+    <figure class="cm-fig">
+      <img src="assets/img/projects/dati-figma.webp" alt="Capa padrão de projeto no Figma e fluxos agrupados por jornada e por modal" width="1035" height="510" loading="lazy" decoding="async">
+      <figcaption>Capa padrão com status, versão e responsáveis à vista, e os fluxos agrupados</figcaption>
+    </figure>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>Objetivo 02 · Design system</i> Uma interface única para todos os produtos</h3>
+    <ul class="cm-cards">
+      <li><b>Objetivo</b><span>Parar de recriar componentes e manter os produtos consistentes.</span></li>
+      <li><b>Minha parte</b><span>Criei as variables, com modos claro e escuro, e organizei a biblioteca.</span></li>
+      <li class="is-result"><b>1.200</b><span>componentes próprios, nos temas claro e escuro</span></li>
+    </ul>
+    <figure class="cm-fig">
+      <img src="assets/img/projects/dati-temas.webp" alt="O mesmo componente da Dati nos temas claro e escuro, lado a lado" width="1035" height="310" loading="lazy" decoding="async">
+      <figcaption>Os mesmos componentes nos dois temas: só as variables mudam</figcaption>
+    </figure>
+    <h4 class="cm-h4">Time do design system</h4>
+    <ul class="cm-people">
+        <li class="cm-person"><img class="cm-person-foto" src="assets/img/time/eduardo.webp" alt="" width="128" height="128" loading="lazy" decoding="async"><b>Eduardo Dierschnabel</b><span>Mapeamento e regras</span></li>
+        <li class="cm-person is-me"><img class="cm-person-foto" src="assets/img/time/bruno.webp" alt="" width="128" height="128" loading="lazy" decoding="async"><b>Bruno Hoffmann</b><span>Variables e estrutura</span></li>
+        <li class="cm-person"><img class="cm-person-foto" src="assets/img/time/amanda.webp" alt="" width="128" height="128" loading="lazy" decoding="async"><b>Amanda Tartari</b><span>Construção</span></li>
+        <li class="cm-person"><img class="cm-person-foto" src="assets/img/time/gabriel.webp" alt="" width="128" height="128" loading="lazy" decoding="async"><b>Gabriel Voesse</b><span>Construção</span></li>
+    </ul>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>Objetivo 03 · Processo</i> Um caminho só, do briefing ao dev</h3>
+    <ul class="cm-cards">
+      <li><b>Objetivo</b><span>Parar de corrigir fluxos depois de desenvolvidos.</span></li>
+      <li><b>O que fizemos</b><span>Ouvimos Produto e Dev numa retro e criamos um fluxo com donos, prazos e 2 aprovações.</span></li>
+      <li class="is-result"><b>−50%</b><span>de alterações em fluxos já em produção</span></li>
+    </ul>
+    <h4 class="cm-h4">Fluxo de validação de design <span>8 etapas · 2 aprovações</span></h4>
+    <ol class="cm-steps-grid">
+        <li class="cm-step">
+          <p class="cm-step-top"><span class="cm-step-n">01</span><span class="cm-step-dono">PO</span></p>
+          <b>Briefing no Jira</b>
+          
+          <span class="cm-step-time">2 a 3 dias</span>
+        </li>
+        <li class="cm-step">
+          <p class="cm-step-top"><span class="cm-step-n">02</span><span class="cm-step-dono">UI/UX</span></p>
+          <b>Fluxo do usuário</b>
+          
+          <span class="cm-step-time">1 dia</span>
+        </li>
+        <li class="cm-step">
+          <p class="cm-step-top"><span class="cm-step-n">03</span><span class="cm-step-dono">PO</span></p>
+          <b>Validação dos cenários</b>
+          
+          <span class="cm-step-time">1 dia</span>
+        </li>
+        <li class="cm-step">
+          <p class="cm-step-top"><span class="cm-step-n">04</span><span class="cm-step-dono">UI/UX</span></p>
+          <b>Tela base</b>
+          
+          <span class="cm-step-time">1 a 3 dias</span>
+        </li>
+        <li class="cm-step cm-step--ok">
+          <p class="cm-step-top"><span class="cm-step-n">05</span><span class="cm-step-dono">Lead de design</span></p>
+          <b>Revisão de design</b>
+          <em>Não aprovado: ajustes em 1 dia</em>
+          <span class="cm-step-time">2 dias</span>
+        </li>
+        <li class="cm-step">
+          <p class="cm-step-top"><span class="cm-step-n">06</span><span class="cm-step-dono">UI/UX</span></p>
+          <b>Fluxos completos</b>
+          
+          <span class="cm-step-time">40 a 120 h</span>
+        </li>
+        <li class="cm-step cm-step--ok">
+          <p class="cm-step-top"><span class="cm-step-n">07</span><span class="cm-step-dono">Liderança</span></p>
+          <b>Revisão final</b>
+          <em>Não aprovado: ajustes em 1 a 4 dias</em>
+          
+        </li>
+        <li class="cm-step">
+          <p class="cm-step-top"><span class="cm-step-n">08</span><span class="cm-step-dono">Desenvolvimento</span></p>
+          <b>Handoff para o dev</b>
+          
+          <span class="cm-step-time">Pronto para desenvolver</span>
+        </li>
+    </ol>
+    <p class="cm-note">Ponto de aprovação: se não aprovado, o fluxo volta para ajustes antes de seguir.</p>
+  </section>
+
+  <section class="cm-sec">
+    <h3 class="cm-h"><i>Produtos</i> Seis produtos entre 2023 e 2025</h3>
+    <ul class="cm-cards cm-prods">
+        <li><span class="cm-prod-top"><b>Central de exportação</b><span class="cm-prod-time">5 meses</span></span><span>Automatiza o andamento dos processos de exportação.</span></li>
+        <li><span class="cm-prod-top"><b>Central de importação</b><span class="cm-prod-time">3 meses</span></span><span>Automatiza o andamento dos processos de importação.</span></li>
+        <li><span class="cm-prod-top"><b>Smart Read</b><span class="cm-prod-time">5 meses</span></span><span>Lê e extrai dados de documentos de comércio exterior com IA.</span></li>
+        <li><span class="cm-prod-top"><b>Configurador</b><span class="cm-prod-time">2 meses</span></span><span>SaaS multi-tenant para estrutura, fluxos e validação.</span></li>
+        <li><span class="cm-prod-top"><b>Catálogo de produtos</b><span class="cm-prod-time">2 meses</span></span><span>Cadastro de produtos integrado ao Portal Único Siscomex.</span></li>
+        <li><span class="cm-prod-top"><b>Processo de importação</b><span class="cm-prod-time">4 meses</span></span><span>Acompanhamento de importações na web e no celular.</span></li>
+    </ul>
+  </section>
+
+  <section class="cm-sec cm-sec--take">
+    <h3 class="cm-h"><i>Aprendizados</i> O que levo deste projeto</h3>
+    <ul class="cm-cards">
+      <li><b>Organização também é entrega.</b><span>Arrumar o Figma não criou telas novas, mas devolveu tempo ao desenvolvimento.</span></li>
+      <li><b>Variables antes de componentes.</b><span>Com modos na base, cada componente vale para os dois temas.</span></li>
+      <li><b>Processo bom tem dono e prazo.</b><span>As discussões foram para o começo do fluxo, não para depois do dev.</span></li>
+    </ul>
+  </section>
+
+  <p class="cm-note">Telas com dados fictícios para preservar informações de clientes.</p>
+</template>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/stage.js"></script>
+</body>
+</html>
